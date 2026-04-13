@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitAI - Connection Lost</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#383845",
+                        "surface": "#12121d",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#00210a",
+                        "on-surface": "#e3e0f1",
+                        "secondary": "#ffb2bc",
+                        "surface-container-low": "#1b1a26",
+                        "on-tertiary": "#003916",
+                        "on-secondary-fixed": "#400012",
+                        "on-primary-fixed": "#100069",
+                        "tertiary-container": "#00a74e",
+                        "tertiary-fixed": "#65ff91",
+                        "surface-container": "#1f1e2a",
+                        "inverse-surface": "#e3e0f1",
+                        "secondary-fixed": "#ffd9dd",
+                        "inverse-on-surface": "#302f3b",
+                        "primary-fixed": "#e3dfff",
+                        "on-surface-variant": "#c7c4d8",
+                        "background": "#12121d",
+                        "primary-container": "#8781ff",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#343440",
+                        "outline-variant": "#464555",
+                        "on-primary-fixed-variant": "#3622ca",
+                        "on-primary": "#2000a4",
+                        "surface-tint": "#c4c0ff",
+                        "on-background": "#e3e0f1",
+                        "secondary-container": "#8f0935",
+                        "tertiary": "#3ae275",
+                        "surface-container-lowest": "#0d0d18",
+                        "primary-fixed-dim": "#c4c0ff",
+                        "primary": "#c4c0ff",
+                        "on-tertiary-container": "#003112",
+                        "on-primary-container": "#1b0091",
+                        "surface-container-high": "#292935",
+                        "outline": "#918fa1",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ffb2bc",
+                        "inverse-primary": "#4f44e2",
+                        "on-secondary-container": "#ff97a7",
+                        "surface-container-highest": "#343440",
+                        "tertiary-fixed-dim": "#3ae275",
+                        "on-secondary": "#670023",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "on-secondary-fixed-variant": "#8f0935",
+                        "surface-dim": "#12121d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-glow {
+            box-shadow: 0 0 40px -10px rgba(196, 192, 255, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body min-h-screen flex flex-col selection:bg-primary/30">
+<main class="flex-grow flex items-center justify-center px-8 relative overflow-hidden">
+<!-- Abstract Background Detail -->
+<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[100px]"></div>
+<div class="w-full max-w-sm text-center z-10">
+<!-- Icon State Section -->
+<div class="mb-12 relative inline-block">
+<div class="w-32 h-32 rounded-full bg-surface-container-low flex items-center justify-center mx-auto mb-8 relative">
+<span class="material-symbols-outlined text-outline text-[64px] opacity-40" data-icon="wifi_off">wifi_off</span>
+<!-- Kinetic pulse rings -->
+<div class="absolute inset-0 rounded-full border border-outline/10 scale-125"></div>
+<div class="absolute inset-0 rounded-full border border-outline/5 scale-[1.6]"></div>
+</div>
+</div>
+<!-- Content Section -->
+<div class="space-y-4 mb-14">
+<h1 class="text-4xl font-headline font-bold text-on-surface tracking-tight">No Connection</h1>
+<p class="text-on-surface-variant text-lg leading-relaxed max-w-[280px] mx-auto font-medium">
+                    Check your internet connection and try again
+                </p>
+</div>
+<!-- Action Cluster -->
+<div class="space-y-6">
+<!-- Primary Action -->
+<button class="w-full h-16 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary-container font-headline font-extrabold text-lg uppercase tracking-wider kinetic-glow active:scale-95 transition-transform">
+                    Retry
+                </button>
+<!-- Secondary Action -->
+<div class="space-y-3 pt-4">
+<button class="w-full h-16 rounded-xl border border-primary/30 bg-surface-variant/20 backdrop-blur-md text-primary font-headline font-bold text-lg active:scale-95 transition-transform flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-[20px]" data-icon="cloud_off">cloud_off</span>
+                        Go Offline
+                    </button>
+<p class="text-outline text-xs font-semibold uppercase tracking-[0.2em]">
+                        View cached workouts
+                    </p>
+</div>
+</div>
+<!-- Tonal Footer Tip -->
+<div class="mt-20 px-6 py-4 rounded-2xl bg-surface-container-lowest border border-outline-variant/10">
+<div class="flex items-start gap-4 text-left">
+<span class="material-symbols-outlined text-tertiary text-[20px] mt-0.5" data-icon="bolt">bolt</span>
+<div>
+<p class="text-on-surface font-bold text-sm">Pro Tip</p>
+<p class="text-on-surface-variant text-xs leading-tight">Your streak is safe! Local training data will sync once you're back online.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Visual Polish: Grainy Texture Overlay -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay" data-alt="subtle grainy noise texture overlay to add depth and tactile feel to the dark UI surface" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAKoz4Dkt1Jk1Jtm-7C1orz4g8fL1gjZKOEZavnGskfLf6gEpWKsbKDXA9ecLBjVoVRHUoYGuP5DShgiotKqiIlZXOmlG3eNvIB3S5TDaf9BJvGyLj4x42pwkbc-C7cv-NYE168asOJHWGuQFkIMA2OncATWYJ33RNPvAcK8Vg_ta7RjMxYcCSiEkHo6ywYExxMv9Spae4unzW538EU3wZfHhJLGvu8oWzl_M1sVJSI78CnlxDzA1BezAuulV-22qigID1t1T7Tq2GC');">
+</div>
+</body></html>

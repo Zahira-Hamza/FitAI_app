@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitAI - Workout Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#918fa1",
+                        "on-primary-container": "#1b0091",
+                        "surface-container-high": "#292935",
+                        "secondary-container": "#8f0935",
+                        "primary-fixed-dim": "#c4c0ff",
+                        "tertiary": "#3ae275",
+                        "surface-container-lowest": "#0d0d18",
+                        "primary": "#c4c0ff",
+                        "on-tertiary-container": "#003112",
+                        "surface-tint": "#c4c0ff",
+                        "on-background": "#e3e0f1",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "on-secondary-fixed-variant": "#8f0935",
+                        "surface-dim": "#12121d",
+                        "tertiary-fixed-dim": "#3ae275",
+                        "on-secondary": "#670023",
+                        "on-secondary-container": "#ff97a7",
+                        "surface-container-highest": "#343440",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ffb2bc",
+                        "inverse-primary": "#4f44e2",
+                        "on-tertiary": "#003916",
+                        "surface-container-low": "#1b1a26",
+                        "on-secondary-fixed": "#400012",
+                        "on-primary-fixed": "#100069",
+                        "tertiary-container": "#00a74e",
+                        "on-tertiary-fixed": "#00210a",
+                        "on-surface": "#e3e0f1",
+                        "secondary": "#ffb2bc",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-bright": "#383845",
+                        "surface": "#12121d",
+                        "primary-container": "#8781ff",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#2000a4",
+                        "outline-variant": "#464555",
+                        "on-primary-fixed-variant": "#3622ca",
+                        "surface-variant": "#343440",
+                        "primary-fixed": "#e3dfff",
+                        "on-surface-variant": "#c7c4d8",
+                        "background": "#12121d",
+                        "secondary-fixed": "#ffd9dd",
+                        "inverse-on-surface": "#302f3b",
+                        "surface-container": "#1f1e2a",
+                        "tertiary-fixed": "#65ff91",
+                        "inverse-surface": "#e3e0f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(52, 52, 64, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        body {
+            background-color: #12121d;
+            font-family: 'Manrope', sans-serif;
+            color: #e3e0f1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-[#12121d]/60 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(108,99,255,0.08)] flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-3">
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-['Space_Grotesk'] font-bold tracking-tight text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#c4c0ff] to-[#8781ff]">FitAI</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#c4c0ff]">share</span>
+<span class="material-symbols-outlined text-[#c4c0ff]">more_vert</span>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative h-[397px] w-full overflow-hidden">
+<img alt="Muscle Group Focus" class="w-full h-full object-cover" data-alt="Cinematic shot of a powerful athlete back muscles under dramatic blue and purple lighting in a high-tech gym setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhkTygGCqQ9Egr0qIk1sA_wgSG8MuLQCu7ltFkCX1jvy52MNmrpgU-hAKmrF9x1FgQ0IqAuXg84Eeg_kxUZat32CmDVCC2B9G7cxhNmWJKtnBFWpMQTUMpl2nplW_iE6X1z3qpK6RoZ2w7V4wN1punHWEa3fPtiTbFRPXPjdKb9GeMKkDN_Q1ArsSnnwcoXPdyrFCGgW23Atek9Vx26R8etCAXczAyxWDcU9JQ9SjuvtCqi5idzgwhhrpLBk1RR5F8xstnnxi6ZCeB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-6 space-y-2">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase bg-secondary-container text-on-secondary-container">
+                Intermediate
+            </span>
+<h2 class="font-headline text-4xl font-bold tracking-tighter leading-tight text-white drop-shadow-lg">Power Hypertrophy: Upper Body</h2>
+<div class="flex gap-4 items-center text-on-surface-variant font-medium">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>45m</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">fitness_center</span>
+<span>8 Exercises</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary">local_fire_department</span>
+<span>420 kcal</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Description & Stats Bento -->
+<main class="px-6 -mt-4 relative z-10 space-y-6">
+<div class="bg-surface-container-low rounded-3xl p-6 shadow-xl">
+<p class="text-on-surface-variant leading-relaxed font-medium">
+                Target your pectorals, deltoids, and triceps with high-intensity mechanical tension. This AI-optimized routine focuses on progressive overload through multi-joint movements followed by isolated metabolic stress.
+            </p>
+</div>
+<!-- Exercise List Section -->
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<h3 class="font-headline text-2xl font-bold text-white">Workout Protocol</h3>
+<span class="text-primary text-sm font-semibold">Total Load: 4,200kg</span>
+</div>
+<!-- List of Exercises -->
+<div class="space-y-3">
+<!-- Exercise Item 1 -->
+<div class="bg-surface-container rounded-2xl p-4 flex items-center gap-4 transition-all hover:bg-surface-container-high border-l-4 border-primary">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-dim">
+<img alt="Barbell Bench Press" class="w-full h-full object-cover" data-alt="Close up of a heavy chrome barbell being lifted off a rack in a moody professional fitness studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL0_GmJ91ZbETYDITZFfFpnSYbHDDFdNv9eS_QeQQxL706HP43XYbRGAI3B0oSkMSAidgC2vveVltr6krac9ZxlzHQMxgQAN2WkqZ3lSJb48D4zDlBDmhGKZ56MYm7ERel23Ouhv90RhxRa0VFIQpbJ3qlYyNNXG7X7OsRVVw3E84iVtXia_ehHrHFb9MqTGW21VGbpr735s0m6OITTePS4qQfJ-QSKr1W8HGOv32VyqLfOXyU9_Kg6jwSSja3ihol-6dTlTTQdYcT"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-primary/60">01</span>
+<h4 class="font-bold text-white">Barbell Bench Press</h4>
+</div>
+<p class="text-sm text-on-surface-variant font-semibold">4 Sets x 8-10 Reps</p>
+</div>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+<!-- Exercise Item 2 -->
+<div class="bg-surface-container-low rounded-2xl p-4 flex items-center gap-4 transition-all hover:bg-surface-container-high">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-dim">
+<img alt="Incline Dumbbell Flyes" class="w-full h-full object-cover" data-alt="Dumbbells on a rack with shallow depth of field in a clean industrial style dark gym" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYlYAJ9GB1fMytkLEZxndqOhIs91Ai8pi6SMntJrOaPgTiCFZUopzwDjufjy5EwaX_PrFuEafPmKBcA17X8CIfKkqt_3908SO0XWAAI6pwJdkXYDNISRnlrjp3aPOfngS4hwWG5vgH0liuYRtykR71A77k4UnaDfjT-kw1wltefsWRDEH6mKpMnzjiVYtGI-3aqU4mO7lxqQcIEsOXZiUthF_TGT3qCsU6sReSqO3LNxLmQ7MrZ7DV7zElIoi5LhbuL15k5Utlkz4g"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-outline">02</span>
+<h4 class="font-bold text-white">Incline Dumbbell Flyes</h4>
+</div>
+<p class="text-sm text-on-surface-variant font-semibold">3 Sets x 12 Reps</p>
+</div>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+<!-- Exercise Item 3 -->
+<div class="bg-surface-container rounded-2xl p-4 flex items-center gap-4 transition-all hover:bg-surface-container-high border-l-4 border-tertiary">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-dim">
+<img alt="Weighted Pull Ups" class="w-full h-full object-cover" data-alt="Pull up bar against a dark concrete wall with a single beam of light hitting the metal surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuYWIg2JksTneYEgxHrQj9-o5wNREZKwx6EAkpINQeRTskZsGr45RGK2sIvXqqAOvljsA7d2pwg6K9opFWjLwE-NrkvIkSXDRj70aUXsIhvBGUxWS6XjMTl8Xr8FS8_1u4B_fO0bU2FdA0jxbEAu3ib5HuiBUxwzJgNr3x4HTXNVdv3AuOxgkLjBMmUD-OMvHjIv9WFXsrsR2Vj73Xbup7e9VzVP5RbcLztZ77voWgjxNFcsFrXQk0pCXdxz9okCVUFg5wSau3XFYr"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-tertiary/60">03</span>
+<h4 class="font-bold text-white">Weighted Pull Ups</h4>
+</div>
+<p class="text-sm text-on-surface-variant font-semibold">4 Sets x MAX Reps</p>
+</div>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+<!-- Exercise Item 4 -->
+<div class="bg-surface-container-low rounded-2xl p-4 flex items-center gap-4 transition-all hover:bg-surface-container-high">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-dim">
+<img alt="Seated Cable Rows" class="w-full h-full object-cover" data-alt="Cable row machine handle close up with dynamic motion blur in the background gym environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1huFSWrP6UYiASW8XFfbiMy-MA_jAcXN8_UPSQqP05lAC6X1exDE8hGMd2s5HtYPX4Pa-NhF7A6MB3-Q246FUdRB-uAffChH_qpHB3YCsum7yZJDslD0eIIETq3o8AEYhK_6eRzeKrMM2Q2cMNFqxm7NShWS9URY5WqvbbTIfImEFna292l9qLGeMfS7_oJ_o26ptMF0OtmR_QQcp44V1EKZuBx_qfFI31Cb_KmUDJurjrBpHIF4yF9LwTFaXbTsludC4H7ROoTAj"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-outline">04</span>
+<h4 class="font-bold text-white">Seated Cable Rows</h4>
+</div>
+<p class="text-sm text-on-surface-variant font-semibold">3 Sets x 10 Reps</p>
+</div>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+<!-- Exercise Item 5 -->
+<div class="bg-surface-container rounded-2xl p-4 flex items-center gap-4 transition-all hover:bg-surface-container-high">
+<div class="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-surface-dim">
+<img alt="Overhead Press" class="w-full h-full object-cover" data-alt="Iron weight plates stacked on a rack in a minimalist gym with high contrast shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUwGqPebU8YvvLDmJ_eAsBkQRB5l9vGd0pUEXwVa9sM_QsbCpGGUoN6FHvfboc67B3SYTYa_1MsLFpFoIl2PVPJYvWHvlNoQEpvExv1_R-eFpQSc1cF4Y0Cck9EkPW0u1ktfTcVAJguwNv40qZpph6n01BdlxEI-Ux3pzgsJb6_brCVtGTm6padf0r35AX9M5URC5gAkqGe9Rk5yRa9fJrtHHo9PkDRO75aMQMpNtp_9kTAo336O1Lpnk1Z_PA9AMMbDPD265eP5Hp"/>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-outline">05</span>
+<h4 class="font-bold text-white">Overhead Press</h4>
+</div>
+<p class="text-sm text-on-surface-variant font-semibold">3 Sets x 8 Reps</p>
+</div>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom CTA -->
+<div class="fixed bottom-0 left-0 w-full p-6 z-50">
+<div class="max-w-md mx-auto glass-panel rounded-3xl p-4 border border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.4)]">
+<button class="w-full bg-gradient-to-br from-[#c4c0ff] to-[#8781ff] text-on-primary py-4 rounded-2xl font-headline font-extrabold text-lg tracking-tight shadow-[0_0_15px_rgba(196,192,255,0.3)] active:scale-95 transition-transform">
+                START WORKOUT
+            </button>
+</div>
+</div>
+<!-- Hidden Bottom NavBar Logic Filter: Bottom Nav is suppressed for task-focused Detail screen as per hierarchy -->
+</body></html>

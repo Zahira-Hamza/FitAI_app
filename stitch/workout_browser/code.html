@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#918fa1",
+                        "on-primary-container": "#1b0091",
+                        "surface-container-high": "#292935",
+                        "secondary-container": "#8f0935",
+                        "primary-fixed-dim": "#c4c0ff",
+                        "tertiary": "#3ae275",
+                        "surface-container-lowest": "#0d0d18",
+                        "primary": "#c4c0ff",
+                        "on-tertiary-container": "#003112",
+                        "surface-tint": "#c4c0ff",
+                        "on-background": "#e3e0f1",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "on-secondary-fixed-variant": "#8f0935",
+                        "surface-dim": "#12121d",
+                        "tertiary-fixed-dim": "#3ae275",
+                        "on-secondary": "#670023",
+                        "on-secondary-container": "#ff97a7",
+                        "surface-container-highest": "#343440",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ffb2bc",
+                        "inverse-primary": "#4f44e2",
+                        "on-tertiary": "#003916",
+                        "surface-container-low": "#1b1a26",
+                        "on-secondary-fixed": "#400012",
+                        "on-primary-fixed": "#100069",
+                        "tertiary-container": "#00a74e",
+                        "on-tertiary-fixed": "#00210a",
+                        "on-surface": "#e3e0f1",
+                        "secondary": "#ffb2bc",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-bright": "#383845",
+                        "surface": "#12121d",
+                        "primary-container": "#8781ff",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#2000a4",
+                        "outline-variant": "#464555",
+                        "on-primary-fixed-variant": "#3622ca",
+                        "surface-variant": "#343440",
+                        "primary-fixed": "#e3dfff",
+                        "on-surface-variant": "#c7c4d8",
+                        "background": "#12121d",
+                        "secondary-fixed": "#ffd9dd",
+                        "inverse-on-surface": "#302f3b",
+                        "surface-container": "#1f1e2a",
+                        "tertiary-fixed": "#65ff91",
+                        "inverse-surface": "#e3e0f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(52, 52, 64, 0.4);
+            backdrop-filter: blur(20px);
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #c4c0ff 0%, #8781ff 100%);
+        }
+        .glow-shadow {
+            box-shadow: 0 0 20px rgba(196, 192, 255, 0.15);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#12121d]/60 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(108,99,255,0.08)] flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-white/10">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a fit person with sweat, dramatic high-contrast lighting in a dark gym environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXTQ0fjg6oLeARfzferJPvMF419YtriwFeus4EhALI602BtArDPBsDpTcMI8IKvhicbl6puUo2zZinonSWgNA5volkdCK9apWxsDlrs3XJa7luTYuvEG2R5M9F7QzaEwXTO9vvV1FGnYf8e8sR22udSHHRI9t01REsKO7kA5-BireAN1PQ8KWyWhSzaLKdCO9Ap0KCzC8ZLBbTQRRch138TPToiaT4z7RpI_tcCW87R_t0B7uIcP1GfNACGWGJ0IPtGYBpQWvPhuEw"/>
+</div>
+<span class="text-2xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#c4c0ff] to-[#8781ff] font-headline">FitAI</span>
+</div>
+<button class="text-[#c4c0ff] hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-6 space-y-8">
+<!-- Search Section -->
+<section class="space-y-6">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="search">search</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline focus:ring-1 focus:ring-primary/40 transition-all shadow-inner" placeholder="Search workouts, muscle groups..." type="text"/>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-3 overflow-x-auto hide-scrollbar -mx-6 px-6 pb-2">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary font-semibold text-sm whitespace-nowrap kinetic-gradient shadow-lg">All</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Chest</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Back</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Legs</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Arms</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Cardio</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-high text-on-surface-variant font-medium text-sm whitespace-nowrap hover:bg-surface-container-highest transition-colors">Full Body</button>
+</div>
+</section>
+<!-- Workout Grid -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="h-32 w-full relative">
+<img alt="Power Chest" class="w-full h-full object-cover" data-alt="Hyper-realistic close up of heavy dumbbells on a gym floor with neon blue accent lighting and moody shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBEsJPAH6D8fglQhoeyzpYy2WUgIWVMQJOmk8XsOuyJ1_CbWuDcQoFx1J6fE5Crx0U1WiCyFY-Xj0SUuIx-SqR5Kwii8CanvfuYsDsysaD-IDbjgfa2wYbvf6c05Px5korjeHQmYpTIEWK_SlnE8YMmLY8ZMKS1FCn6dgzOwcD34mWbZ7ofU0tVHuxTQSV61Das7v7S8wzTX0O8-uhuqLUwJ-2_cgpglqXo8nSfQfkK9zoAy4LcLVx8uCFoWYyDnRQV9Gqxok2OV93"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute top-2 right-2 bg-secondary-container/80 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-on-secondary-container">Advanced</div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="fitness_center">fitness_center</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">Chest</span>
+</div>
+<h3 class="font-headline font-bold text-base leading-tight">Hypertrophy Chest Blast</h3>
+<div class="flex items-center justify-between pt-2 text-outline text-[11px] font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="list_alt">list_alt</span> 8 Exercises</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 45m</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="h-32 w-full relative">
+<img alt="Leg Day" class="w-full h-full object-cover" data-alt="Modern fitness equipment in a high-tech gym with glowing green line lighting along the walls and dark metallic textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgpILH344XO5AftVctU9ivRoR0QXLK1sTLt4ay0ktq_AIXAU1gm-QRwmxF7Slb4Kt7qThh2vPrRs391TpahIEIyurcdCVQG8y5KKKCSF2MPpZSCVDpWs_Ocvs-A5CnhOEf8p82I5nTdf3F5oefjzWuYE_ATwt5MAUP8H3sfwEPtUF5RljZVIHLceGLXfda1WYX7SqL3NSJCAYT5kqgID43c5aDiwMbH0N9Z-UDB-NsjUQTu_7TOmtF3T6Y0Bc7OUnVhxIMm0G4IK50"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute top-2 right-2 bg-tertiary/20 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-tertiary">Beginner</div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="settings_accessibility">settings_accessibility</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">Legs</span>
+</div>
+<h3 class="font-headline font-bold text-base leading-tight">Foundation Squat Flow</h3>
+<div class="flex items-center justify-between pt-2 text-outline text-[11px] font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="list_alt">list_alt</span> 5 Exercises</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 30m</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="h-32 w-full relative">
+<img alt="Back Strength" class="w-full h-full object-cover" data-alt="Wide angle shot of a power rack in a professional performance training center with cool blue ambient light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJcPmikPhO8Pf-89Dw32YZZ7bbioaW2EkZO9Tnvsl1S7XyzCK5B5HtKC-SuSs6Tc4CD8WBoyZfQ5mmU_tjFu9ZcXCfrUYwWOxQVBiXUDgAz1x0jZoKuVzcBWyXKBQKBcsEitCxw2huXKLuqMkMHJ_CAWqOk-wxpLyYoH13aq8GOnN5fbv9lOH9g02LihJpk_Oy3FSOh73P7nojj_qAZR7nD4Y6ePkPYmX7rlFGJ8XdSU5PXkC0nxiTUMa1ZOgI7bDVHhYfa1EaEubD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute top-2 right-2 bg-primary/20 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-primary">Intermediate</div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="back_hand">back_hand</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">Back</span>
+</div>
+<h3 class="font-headline font-bold text-base leading-tight">Deadlift Power Core</h3>
+<div class="flex items-center justify-between pt-2 text-outline text-[11px] font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="list_alt">list_alt</span> 6 Exercises</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 50m</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="h-32 w-full relative">
+<img alt="Arm Pump" class="w-full h-full object-cover" data-alt="Extreme close up of a weight plate texture with sharp highlights and deep shadows in a modern industrial gym" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrcpdAyv9JxQF7Qpgn0zeEHp5xWA_rpEKjbJN8oiB-_ckh9wRL7smIvz7R0HOg9QxJ7kqTnhghC12jZvUrnhkU-PfRe3hUO69nQ8vNU24FoyS0sHPPyfqCIztSbtyT9GJrwofQ-fNiaSem5EUuuXpUTYgO4W9X3GUdPux-HD-QjCuc9QOPrE9tcGMJslxtbwp6MJycnL2xUcFMsqeWbwur9Ot2TyOIZxau-pirIRj3-tAMMp1k-f7LcMvVeB2YNA6kJ6CpUNw_nJ3x"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute top-2 right-2 bg-primary/20 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-primary">Intermediate</div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="reorder">reorder</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">Arms</span>
+</div>
+<h3 class="font-headline font-bold text-base leading-tight">Bicep Peak Sculpture</h3>
+<div class="flex items-center justify-between pt-2 text-outline text-[11px] font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="list_alt">list_alt</span> 7 Exercises</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 40m</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="h-32 w-full relative">
+<img alt="HIIT" class="w-full h-full object-cover" data-alt="Action shot of motion blurred athlete jumping in a dark studio with vibrant green neon pulses of light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG9TUV0Tu8V-aW1Zp9660544-i5NQajwRQRaXWmkMifGyUdyrcJ4iGIlE6M1vCI_qq1OZJSXnsx-nWYjhL8-JJSeVduhwqy3VvH800sQqdAfxidEK6-bQO67nzJSSlY5SQEqr_qBHGkhUTZnrT7Daom93trkiWqvhtRZzl7DSK9aayt2EEvy57bon_iLv-qmnzU1i8q-EEXttCPuYiAH-LKZg7Ru2122nWtICyCKSCvubpj7qlQFc6-hzFSC7tjtQkY-bDQZyI8gzD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute top-2 right-2 bg-secondary-container/80 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-on-secondary-container">Advanced</div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="bolt">bolt</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">Cardio</span>
+</div>
+<h3 class="font-headline font-bold text-base leading-tight">Metabolic Engine HIIT</h3>
+<div class="flex items-center justify-between pt-2 text-outline text-[11px] font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="list_alt">list_alt</span> 12 Exercises</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 25m</span>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden flex flex-col group active:scale-[0.98] transition-transform">
+<div class="h-32 w-full relative">
+<img alt="Full Body" class="w-full h-full object-cover" data-alt="Minimalist gym aesthetic with kettlebells arranged neatly on a dark floor with soft purple overhead light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA5IFLgON4XPyNc9C-US0Oo-yYttgUf6SFori0PBIqI-OpZddnN0F-7XgfqzQAXkR6JscOvm4bURc9FTLcYPQdVwFrNBfOeW4xmhRs314V0C2IU7GsMFNUR73fj5_-uU19OFKe-Ijn3BTaUl04eVci27mS_j1cYyPOyw6Uvoh6X12JIV1PdGAsY2BWg1SqNYQCd4Lzy0rguwfFp8hz-lNk8JNoPN4usZTiiK8GxkaCOwVe8Q2scBEKri3GAfFAyVmPDFsnPpQIr1JB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent"></div>
+<div class="absolute top-2 right-2 bg-primary/20 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider text-primary">Intermediate</div>
+</div>
+<div class="p-4 space-y-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="body_system">body_system</span>
+<span class="text-[10px] font-bold tracking-widest uppercase">Full Body</span>
+</div>
+<h3 class="font-headline font-bold text-base leading-tight">Total Body Resonator</h3>
+<div class="flex items-center justify-between pt-2 text-outline text-[11px] font-medium">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="list_alt">list_alt</span> 10 Exercises</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span> 60m</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#1c1c2e]/40 backdrop-blur-2xl rounded-t-3xl border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#c4c0ff] bg-[#c4c0ff]/10 rounded-xl px-3 py-1 shadow-[0_0_15px_rgba(196,192,255,0.3)] active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="fitness_center">fitness_center</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="smart_toy">smart_toy</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">AI Coach</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="insights">insights</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Profile</span>
+</a>
+</nav>
+</body></html>

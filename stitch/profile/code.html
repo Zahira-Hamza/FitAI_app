@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#918fa1",
+                    "on-primary-container": "#1b0091",
+                    "surface-container-high": "#292935",
+                    "secondary-container": "#8f0935",
+                    "primary-fixed-dim": "#c4c0ff",
+                    "tertiary": "#3ae275",
+                    "surface-container-lowest": "#0d0d18",
+                    "primary": "#c4c0ff",
+                    "on-tertiary-container": "#003112",
+                    "surface-tint": "#c4c0ff",
+                    "on-background": "#e3e0f1",
+                    "on-tertiary-fixed-variant": "#005323",
+                    "on-secondary-fixed-variant": "#8f0935",
+                    "surface-dim": "#12121d",
+                    "tertiary-fixed-dim": "#3ae275",
+                    "on-secondary": "#670023",
+                    "on-secondary-container": "#ff97a7",
+                    "surface-container-highest": "#343440",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#ffb2bc",
+                    "inverse-primary": "#4f44e2",
+                    "on-tertiary": "#003916",
+                    "surface-container-low": "#1b1a26",
+                    "on-secondary-fixed": "#400012",
+                    "on-primary-fixed": "#100069",
+                    "tertiary-container": "#00a74e",
+                    "on-tertiary-fixed": "#00210a",
+                    "on-surface": "#e3e0f1",
+                    "secondary": "#ffb2bc",
+                    "error": "#ffb4ab",
+                    "error-container": "#93000a",
+                    "surface-bright": "#383845",
+                    "surface": "#12121d",
+                    "primary-container": "#8781ff",
+                    "on-error-container": "#ffdad6",
+                    "on-primary": "#2000a4",
+                    "outline-variant": "#464555",
+                    "on-primary-fixed-variant": "#3622ca",
+                    "surface-variant": "#343440",
+                    "primary-fixed": "#e3dfff",
+                    "on-surface-variant": "#c7c4d8",
+                    "background": "#12121d",
+                    "secondary-fixed": "#ffd9dd",
+                    "inverse-on-surface": "#302f3b",
+                    "surface-container": "#1f1e2a",
+                    "tertiary-fixed": "#65ff91",
+                    "inverse-surface": "#e3e0f1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #12121d;
+            font-family: 'Manrope', sans-serif;
+            color: #e3e0f1;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(52, 52, 64, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(196, 192, 255, 0.1);
+        }
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(196, 192, 255, 0.3);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-[#12121d]/60 backdrop-blur-xl flex justify-between items-center px-6 h-16 shadow-[0_8px_32px_0_rgba(108,99,255,0.08)]">
+<div class="flex items-center gap-3">
+<span class="font-['Space_Grotesk'] font-bold tracking-tighter text-2xl text-transparent bg-clip-text bg-gradient-to-br from-[#c4c0ff] to-[#8781ff]">FitAI</span>
+</div>
+<button class="text-[#c4c0ff] hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Profile Header -->
+<section class="flex flex-col items-center text-center mb-10">
+<div class="relative mb-4">
+<div class="w-28 h-28 rounded-full p-1 bg-gradient-to-br from-[#c4c0ff] to-[#8781ff] neon-glow">
+<img alt="Profile" class="w-full h-full rounded-full object-cover border-4 border-[#12121d]" data-alt="Close-up portrait of a young athletic woman with confident expression, dramatic neon rim lighting, high-end photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDncXQ3P-_FWSBmIf5eyhBxAofsTFh5CjlCuzg9QGIsaZ6rmwq53NYzSEnA62qHBZRfWD02lzlZ0F_Uk6qyhP6zEtJPBNh3A89Ic2EbklFYLwk4buNG44_47wWhCox-rbVOyBQrrEWuBXvdk_qhke2xtEAO4ETwlmxUe2ilsYjGKMliE-g7DBXELqK6ATI_-o_n-wDhHJ-8AfDIPCyPrSS2uIKj8MtHCdoHKsxwmHAZ6iijn-sv-bQAlMqovFmN4VVvmgVmRTdYeq9Z"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary p-2 rounded-full shadow-lg hover:opacity-90 transition-all active:scale-90">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<h1 class="font-headline text-3xl font-bold tracking-tight text-on-background mb-1">Alex</h1>
+<p class="font-body text-outline text-sm mb-6">alex.v@performance.fit</p>
+<button class="px-8 py-2.5 rounded-xl bg-surface-container-high border border-primary/20 text-primary font-semibold text-sm hover:bg-surface-container-highest transition-colors active:scale-95">
+                Edit Profile
+            </button>
+</section>
+<!-- Stats Grid -->
+<section class="grid grid-cols-3 gap-4 mb-8">
+<div class="bg-surface-container-low rounded-2xl p-4 flex flex-col items-center justify-center text-center border border-white/5">
+<span class="font-headline text-2xl font-bold text-primary">128</span>
+<span class="font-label text-[10px] uppercase tracking-widest text-outline mt-1">Workouts</span>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-4 flex flex-col items-center justify-center text-center border border-white/5">
+<span class="font-headline text-2xl font-bold text-primary">246</span>
+<span class="font-label text-[10px] uppercase tracking-widest text-outline mt-1">Hours</span>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-4 flex flex-col items-center justify-center text-center border border-white/5">
+<span class="font-headline text-2xl font-bold text-tertiary">14</span>
+<span class="font-label text-[10px] uppercase tracking-widest text-outline mt-1">Day Streak</span>
+</div>
+</section>
+<!-- My Goals Card -->
+<section class="mb-8">
+<div class="glass-card rounded-3xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h2 class="font-headline text-xl font-bold text-white mb-1">Current Goal</h2>
+<p class="text-outline text-sm">Lean Mass Gain</p>
+</div>
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-white/10" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-tertiary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="176" stroke-dashoffset="44" stroke-width="4"></circle>
+</svg>
+<span class="absolute font-headline text-xs font-bold text-tertiary">75%</span>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary text-[10px] font-bold uppercase tracking-wider rounded-full border border-tertiary/20">On Track</span>
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider rounded-full border border-primary/20">12 Days Left</span>
+</div>
+</div>
+</section>
+<!-- Settings List -->
+<section class="space-y-3 mb-10">
+<h3 class="font-label text-[11px] uppercase tracking-[0.2em] text-outline px-2 mb-4">Preferences</h3>
+<!-- Item: Notifications -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-2xl group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</div>
+<span class="font-body font-medium">Notifications</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Item: Units -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-2xl group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="straighten">straighten</span>
+</div>
+<span class="font-body font-medium">Units</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-outline font-medium">Metric (kg, cm)</span>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Item: Dark Mode Toggle -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-2xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</div>
+<span class="font-body font-medium">Dark Mode</span>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative p-1 flex items-center justify-end">
+<div class="w-4 h-4 bg-on-primary rounded-full shadow-sm"></div>
+</div>
+</div>
+<!-- Item: Linked Accounts -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-2xl group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+</div>
+<span class="font-body font-medium">Linked Accounts</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Item: Help -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-2xl group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</div>
+<span class="font-body font-medium">Help &amp; Support</span>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+</section>
+<!-- Log Out Button -->
+<button class="w-full p-4 rounded-2xl bg-secondary-container/10 border border-secondary/20 flex items-center justify-center gap-3 group active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[#FF6584]" data-icon="logout">logout</span>
+<span class="font-headline font-bold text-[#FF6584] uppercase tracking-widest text-sm">Log Out</span>
+</button>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#1c1c2e]/40 backdrop-blur-2xl rounded-t-3xl border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="fitness_center">fitness_center</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Workouts</span>
+</a>
+<div class="relative -mt-10">
+<button class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#c4c0ff] to-[#8781ff] flex items-center justify-center shadow-xl shadow-primary/20 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-primary text-2xl" data-icon="smart_toy">smart_toy</span>
+</button>
+</div>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="insights">insights</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#c4c0ff] bg-[#c4c0ff]/10 rounded-xl px-3 py-1 shadow-[0_0_15px_rgba(196,192,255,0.3)] active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest">Profile</span>
+</a>
+</nav>
+</body></html>

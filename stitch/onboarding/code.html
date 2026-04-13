@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitAI Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#918fa1",
+                        "on-primary-container": "#1b0091",
+                        "surface-container-high": "#292935",
+                        "secondary-container": "#8f0935",
+                        "primary-fixed-dim": "#c4c0ff",
+                        "tertiary": "#3ae275",
+                        "surface-container-lowest": "#0d0d18",
+                        "primary": "#c4c0ff",
+                        "on-tertiary-container": "#003112",
+                        "surface-tint": "#c4c0ff",
+                        "on-background": "#e3e0f1",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "on-secondary-fixed-variant": "#8f0935",
+                        "surface-dim": "#12121d",
+                        "tertiary-fixed-dim": "#3ae275",
+                        "on-secondary": "#670023",
+                        "on-secondary-container": "#ff97a7",
+                        "surface-container-highest": "#343440",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ffb2bc",
+                        "inverse-primary": "#4f44e2",
+                        "on-tertiary": "#003916",
+                        "surface-container-low": "#1b1a26",
+                        "on-secondary-fixed": "#400012",
+                        "on-primary-fixed": "#100069",
+                        "tertiary-container": "#00a74e",
+                        "on-tertiary-fixed": "#00210a",
+                        "on-surface": "#e3e0f1",
+                        "secondary": "#ffb2bc",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-bright": "#383845",
+                        "surface": "#12121d",
+                        "primary-container": "#8781ff",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#2000a4",
+                        "outline-variant": "#464555",
+                        "on-primary-fixed-variant": "#3622ca",
+                        "surface-variant": "#343440",
+                        "primary-fixed": "#e3dfff",
+                        "on-surface-variant": "#c7c4d8",
+                        "background": "#12121d",
+                        "secondary-fixed": "#ffd9dd",
+                        "inverse-on-surface": "#302f3b",
+                        "surface-container": "#1f1e2a",
+                        "tertiary-fixed": "#65ff91",
+                        "inverse-surface": "#e3e0f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #12121d;
+            font-family: 'Manrope', sans-serif;
+            color: #e3e0f1;
+            overflow-x: hidden;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-card {
+            background: rgba(28, 28, 46, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen">
+<!-- Top Branding Anchor -->
+<header class="fixed top-0 w-full z-50 flex justify-center items-center px-6 h-16 bg-gradient-to-b from-[#12121d] to-transparent">
+<h1 class="text-2xl font-['Space_Grotesk'] font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#c4c0ff] to-[#8781ff]">FitAI</h1>
+</header>
+<main class="flex-grow flex flex-col justify-center items-center relative w-full pt-16 pb-32 overflow-hidden">
+<!-- Kinetic Lens Background Elements -->
+<div class="absolute top-1/4 -left-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-tertiary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<!-- Horizontal Slider Container -->
+<div class="w-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar">
+<!-- Slide 1: Track Every Rep -->
+<section class="flex-shrink-0 w-full px-6 flex flex-col items-center justify-center snap-center">
+<div class="w-full max-w-md space-y-8">
+<div class="relative group">
+<div class="absolute inset-0 bg-primary/20 rounded-[2rem] blur-2xl transition-all duration-500 group-hover:blur-3xl"></div>
+<div class="relative bg-surface-container-high rounded-[2rem] overflow-hidden aspect-square flex items-center justify-center shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="cinematic close-up of a high-performance athlete lifting weights in a dark futuristic gym with neon purple rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3IqOzK6R7EPuZ2DrwWLTDzqMhQOOtuqJLc6ZoxMsxHLRFX65sx9j8kSvVTn6f3TTacx5GeIn_JR977r5duCGj9MztI1ajhSF7dCl6ZTfVlLQaIwmj4vRwuaHar-ZzQMn6uaiv7s_dPQwGqHil4PjuhccyH8WW0Yyivtj-Dn-FMYA5NAzDjMgHybTvIc-4YsLKmvPpew2DNBBcR-ENI4X4Af6Jp8FegpHzws0pkJHZ-UV1rRdFoAuw2OA6T0lygASYbYq3CRxqX8nC"/>
+</div>
+</div>
+<div class="text-center space-y-4">
+<h2 class="text-4xl md:text-5xl font-headline font-bold tracking-tight text-on-background leading-none">
+                            Track Every Rep
+                        </h2>
+<p class="text-on-surface-variant text-lg leading-relaxed font-body max-w-[280px] mx-auto">
+                            Log your workouts and watch your strength grow day by day.
+                        </p>
+</div>
+</div>
+</section>
+<!-- Slide 2: AI Workout Plans -->
+<section class="flex-shrink-0 w-full px-6 flex flex-col items-center justify-center snap-center">
+<div class="w-full max-w-md space-y-8">
+<div class="relative group">
+<div class="absolute inset-0 bg-primary-container/20 rounded-[2rem] blur-2xl transition-all duration-500 group-hover:blur-3xl"></div>
+<div class="relative bg-surface-container-high rounded-[2rem] overflow-hidden aspect-square flex items-center justify-center shadow-2xl">
+<div class="absolute inset-0 bg-gradient-to-tr from-surface-dim via-transparent to-primary/10"></div>
+<div class="flex flex-col items-center space-y-6">
+<span class="material-symbols-outlined text-8xl text-primary animate-pulse" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<div class="bg-primary/10 backdrop-blur-md px-6 py-3 rounded-full border border-primary/20">
+<span class="text-primary font-headline font-semibold tracking-wider uppercase text-xs">Gemini AI Integrated</span>
+</div>
+</div>
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50" data-alt="futuristic digital visualization of human muscle groups glowing with fiber optic light strands in a tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvgrPEXSAZE94m3_SRnksLYVwU9tXr36-EEO2d4MphLwvh6r-Vbe_WkaKKQ6seb8KJd99GdM4pNZNamM7xxgjVYH3NmlXNKvJAsTtHgGIVdVKqpZMTIHSf_SjPbknrVXOAWnjpbwelcVt_D4lDDsOWukFpXkEmzJVopbU-e1V7iD72GaiJwWEWM34jX3Ebguvoo8OvIPf7y2yJmV87CuS25p6Qtwyilb0n0PCwP7y5a4Z_uMgVfaJMpO1AiEHkImS29mseCPPke2x7"/>
+</div>
+</div>
+<div class="text-center space-y-4">
+<h2 class="text-4xl md:text-5xl font-headline font-bold tracking-tight text-on-background leading-none">
+                            AI Workout Plans
+                        </h2>
+<p class="text-on-surface-variant text-lg leading-relaxed font-body max-w-[280px] mx-auto">
+                            Get personalized workout suggestions powered by Gemini AI.
+                        </p>
+</div>
+</div>
+</section>
+<!-- Slide 3: See Your Progress -->
+<section class="flex-shrink-0 w-full px-6 flex flex-col items-center justify-center snap-center">
+<div class="w-full max-w-md space-y-8">
+<div class="relative group">
+<div class="absolute inset-0 bg-tertiary/20 rounded-[2rem] blur-2xl transition-all duration-500 group-hover:blur-3xl"></div>
+<div class="relative bg-surface-container-high rounded-[2rem] overflow-hidden aspect-square flex items-center justify-center shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="dynamic abstract visualization of glowing green data charts and health metrics on a dark glass surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQwx-6pZtFIPz4F4U2lTQdsZ2jaEn7ktbRZPlbRWd3Kwbs09xPi2XLJqTtvHGMzFU9kVDEK-RHdg7TgdCrkPRyopYiXtLvLvrnielYhjVozFKkHJm7gs-Pea9g5-l2Q3QnjnhIskWWvsHLhqhPyDN0dzHVoW05qIL5l9qiuH9M7y7PYeIoKn_vEGVR_iBO7yBwdd2wIY3Z0EWZ41taJgSc3czvRNnC_Lmz15lafM-q5n3lvDiQuxojlaM56Xyd583Q3WgCynmpf-5n"/>
+</div>
+</div>
+<div class="text-center space-y-4">
+<h2 class="text-4xl md:text-5xl font-headline font-bold tracking-tight text-on-background leading-none">
+                            See Your Progress
+                        </h2>
+<p class="text-on-surface-variant text-lg leading-relaxed font-body max-w-[280px] mx-auto">
+                            Beautiful charts that show how far you've come.
+                        </p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Action Area -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex flex-col items-center pb-12 pt-6 px-8 bg-gradient-to-t from-[#12121d] via-[#12121d]/90 to-transparent">
+<!-- Progress Indicators -->
+<div class="flex space-x-2 mb-10">
+<div class="h-1.5 w-8 rounded-full bg-primary shadow-[0_0_10px_rgba(196,192,255,0.4)]"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-surface-container-highest"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-surface-container-highest"></div>
+</div>
+<!-- Dynamic Controls Container -->
+<div class="w-full max-w-md flex flex-col items-center space-y-6">
+<!-- Case 1: Next Action (Used on Slides 1 & 2) -->
+<button class="w-full bg-gradient-to-br from-primary to-primary-container h-14 rounded-xl flex items-center justify-center font-headline font-bold text-on-primary text-lg shadow-[0_8px_32px_rgba(108,99,255,0.3)] hover:opacity-90 active:scale-[0.98] transition-all">
+                Next
+            </button>
+<!-- Case 2: Get Started Action (Used on Slide 3 - Hidden by default in multi-slide logic, but placed here for the layout) -->
+<!-- 
+            <button class="hidden w-full bg-gradient-to-br from-tertiary to-tertiary-container h-14 rounded-xl flex items-center justify-center font-headline font-bold text-on-tertiary text-lg shadow-[0_8px_32px_rgba(58,226,117,0.3)] hover:opacity-90 active:scale-[0.98] transition-all">
+                Get Started
+            </button> 
+            -->
+<!-- Secondary Action -->
+<button class="font-label font-bold text-primary uppercase tracking-[0.2em] text-xs py-2 hover:opacity-70 transition-opacity">
+                Skip
+            </button>
+</div>
+</footer>
+<!-- Decorative Screen Texture -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+</body></html>

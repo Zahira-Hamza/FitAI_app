@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitAI - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#918fa1",
+                    "on-primary-container": "#1b0091",
+                    "surface-container-high": "#292935",
+                    "secondary-container": "#8f0935",
+                    "primary-fixed-dim": "#c4c0ff",
+                    "tertiary": "#3ae275",
+                    "surface-container-lowest": "#0d0d18",
+                    "primary": "#c4c0ff",
+                    "on-tertiary-container": "#003112",
+                    "surface-tint": "#c4c0ff",
+                    "on-background": "#e3e0f1",
+                    "on-tertiary-fixed-variant": "#005323",
+                    "on-secondary-fixed-variant": "#8f0935",
+                    "surface-dim": "#12121d",
+                    "tertiary-fixed-dim": "#3ae275",
+                    "on-secondary": "#670023",
+                    "on-secondary-container": "#ff97a7",
+                    "surface-container-highest": "#343440",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#ffb2bc",
+                    "inverse-primary": "#4f44e2",
+                    "on-tertiary": "#003916",
+                    "surface-container-low": "#1b1a26",
+                    "on-secondary-fixed": "#400012",
+                    "on-primary-fixed": "#100069",
+                    "tertiary-container": "#00a74e",
+                    "on-tertiary-fixed": "#00210a",
+                    "on-surface": "#e3e0f1",
+                    "secondary": "#ffb2bc",
+                    "error": "#ffb4ab",
+                    "error-container": "#93000a",
+                    "surface-bright": "#383845",
+                    "surface": "#12121d",
+                    "primary-container": "#8781ff",
+                    "on-error-container": "#ffdad6",
+                    "on-primary": "#2000a4",
+                    "outline-variant": "#464555",
+                    "on-primary-fixed-variant": "#3622ca",
+                    "surface-variant": "#343440",
+                    "primary-fixed": "#e3dfff",
+                    "on-surface-variant": "#c7c4d8",
+                    "background": "#12121d",
+                    "secondary-fixed": "#ffd9dd",
+                    "inverse-on-surface": "#302f3b",
+                    "surface-container": "#1f1e2a",
+                    "tertiary-fixed": "#65ff91",
+                    "inverse-surface": "#e3e0f1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0F0F1A;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(52, 52, 64, 0.4);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+        }
+        .kinetic-glow {
+            box-shadow: 0 0 20px rgba(196, 192, 255, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background min-h-screen flex items-center justify-center p-6 relative">
+<!-- Kinetic Background Accents -->
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-[-5%] right-[-5%] w-[40%] h-[40%] rounded-full bg-secondary/5 blur-[100px] pointer-events-none"></div>
+<main class="w-full max-w-md z-10">
+<!-- Logo Section -->
+<div class="flex flex-col items-center mb-12">
+<div class="mb-4 p-4 rounded-2xl bg-gradient-to-br from-primary to-primary-container shadow-[0_0_30px_rgba(135,129,255,0.4)]">
+<span class="material-symbols-outlined text-on-primary text-4xl" data-icon="fitness_center">fitness_center</span>
+</div>
+<h1 class="font-headline text-4xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-container">FitAI</h1>
+<p class="font-body text-outline mt-2 text-sm tracking-wide">LEVEL UP YOUR TRAINING</p>
+</div>
+<!-- Login Card -->
+<div class="glass-panel rounded-[2rem] p-8 md:p-10 border border-white/5 kinetic-glow">
+<div class="mb-8">
+<h2 class="font-headline text-2xl font-bold text-on-surface">Welcome back</h2>
+<p class="font-body text-on-surface-variant text-sm mt-1">Please enter your details to sign in.</p>
+</div>
+<form class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="font-label text-xs font-bold uppercase tracking-widest text-primary/80 px-1">Email Address</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" data-icon="mail">mail</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:ring-2 focus:ring-primary/40 transition-all duration-300" placeholder="name@energy.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center px-1">
+<label class="font-label text-xs font-bold uppercase tracking-widest text-primary/80">Password</label>
+<a class="font-label text-xs font-bold text-primary hover:opacity-80 transition-opacity" href="#">Forgot password?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" data-icon="lock">lock</span>
+<input class="w-full bg-surface-container-lowest border-none rounded-xl py-4 pl-12 pr-12 text-on-surface placeholder:text-outline/50 focus:ring-2 focus:ring-primary/40 transition-all duration-300" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Login Button -->
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold py-4 rounded-xl shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all duration-200 uppercase tracking-widest text-sm" type="submit">
+                    Login
+                </button>
+<!-- Divider -->
+<div class="relative flex items-center py-2">
+<div class="flex-grow border-t border-outline-variant/20"></div>
+<span class="flex-shrink mx-4 text-outline text-xs font-label font-medium uppercase tracking-widest">Or continue with</span>
+<div class="flex-grow border-t border-outline-variant/20"></div>
+</div>
+<!-- Google Button -->
+<button class="w-full bg-surface-container-high border border-primary/30 text-on-surface font-label font-bold py-4 rounded-xl flex items-center justify-center gap-3 hover:bg-surface-container-highest transition-colors active:scale-95 duration-200" type="button">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="currentColor"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-1 .67-2.28 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="currentColor"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="currentColor"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="currentColor"></path>
+</svg>
+                    Continue with Google
+                </button>
+</form>
+<div class="mt-10 text-center">
+<p class="font-body text-on-surface-variant text-sm">
+                    Don't have an account? 
+                    <a class="text-primary font-bold hover:underline underline-offset-4 ml-1" href="#">Sign up</a>
+</p>
+</div>
+</div>
+<!-- Footer Visual Decor -->
+<div class="mt-12 flex justify-between items-center opacity-40">
+<div class="flex gap-4">
+<span class="h-[2px] w-8 bg-tertiary rounded-full"></span>
+<span class="h-[2px] w-4 bg-outline-variant rounded-full"></span>
+<span class="h-[2px] w-4 bg-outline-variant rounded-full"></span>
+</div>
+<div class="text-[10px] font-label font-bold uppercase tracking-[0.2em] text-outline">
+                v2.4.0 High-Performance
+            </div>
+</div>
+</main>
+<!-- Background Decorative Image (Subtle) -->
+<div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+<div class="absolute -bottom-20 -left-20 w-[600px] h-[600px] opacity-10 rotate-12">
+<img alt="" class="w-full h-full object-cover rounded-full grayscale mix-blend-screen" data-alt="abstract close-up of heavy metal gym equipment with dramatic shadows and cinematic moody lighting in a dark industrial space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeDkBOrEzwOCF3s7NdE3jYdmt4bXr-p9fgv3vlrAOrbCl4_Goktyfg9WuOaPYG-VViJGyfpfKP_sGl3BawNAflpG7f3spU0QgMSQYsPaTVStRy2AuwHKZmWetdYCTTUugymlBb2lMm5W7NFL7ZReys2y-q1sZ1cb2lmi-erNQ_owhSAICejQqFkCMq8VlIVuTQgxz64-vQuMz0xvdkKnBZJ5mTEDA2M1SOE34rniL5D9KLUt-_EDBaOsfpamraBn4zzNDC1Kt8MkRl"/>
+</div>
+</div>
+</body></html>

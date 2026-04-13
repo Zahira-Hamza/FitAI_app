@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitAI - Create Account</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#918fa1",
+                        "on-primary-container": "#1b0091",
+                        "surface-container-high": "#292935",
+                        "secondary-container": "#8f0935",
+                        "primary-fixed-dim": "#c4c0ff",
+                        "tertiary": "#3ae275",
+                        "surface-container-lowest": "#0d0d18",
+                        "primary": "#c4c0ff",
+                        "on-tertiary-container": "#003112",
+                        "surface-tint": "#c4c0ff",
+                        "on-background": "#e3e0f1",
+                        "on-tertiary-fixed-variant": "#005323",
+                        "on-secondary-fixed-variant": "#8f0935",
+                        "surface-dim": "#12121d",
+                        "tertiary-fixed-dim": "#3ae275",
+                        "on-secondary": "#670023",
+                        "on-secondary-container": "#ff97a7",
+                        "surface-container-highest": "#343440",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ffb2bc",
+                        "inverse-primary": "#4f44e2",
+                        "on-tertiary": "#003916",
+                        "surface-container-low": "#1b1a26",
+                        "on-secondary-fixed": "#400012",
+                        "on-primary-fixed": "#100069",
+                        "tertiary-container": "#00a74e",
+                        "on-tertiary-fixed": "#00210a",
+                        "on-surface": "#e3e0f1",
+                        "secondary": "#ffb2bc",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "surface-bright": "#383845",
+                        "surface": "#12121d",
+                        "primary-container": "#8781ff",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#2000a4",
+                        "outline-variant": "#464555",
+                        "on-primary-fixed-variant": "#3622ca",
+                        "surface-variant": "#343440",
+                        "primary-fixed": "#e3dfff",
+                        "on-surface-variant": "#c7c4d8",
+                        "background": "#12121d",
+                        "secondary-fixed": "#ffd9dd",
+                        "inverse-on-surface": "#302f3b",
+                        "surface-container": "#1f1e2a",
+                        "tertiary-fixed": "#65ff91",
+                        "inverse-surface": "#e3e0f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-glow {
+            box-shadow: 0 0 40px 10px rgba(196, 192, 255, 0.05);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col relative overflow-hidden">
+<!-- Background Kinetic Elements -->
+<div class="fixed inset-0 z-0 pointer-events-none">
+<div class="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-primary/10 blur-[120px]"></div>
+<div class="absolute bottom-[-5%] left-[-5%] w-[40%] h-[40%] rounded-full bg-secondary-container/10 blur-[100px]"></div>
+</div>
+<!-- Main Content -->
+<main class="relative z-10 flex-grow flex items-center justify-center px-6 py-12 md:py-24">
+<div class="w-full max-w-md">
+<!-- Branding Header -->
+<div class="text-center mb-10">
+<div class="inline-flex items-center justify-center p-3 rounded-2xl bg-surface-container-high border border-white/5 mb-6 kinetic-glow">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="smart_toy">smart_toy</span>
+</div>
+<h1 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-primary to-primary-container mb-2">
+                    Create Account
+                </h1>
+<p class="text-on-surface-variant font-medium tracking-wide">
+                    Join the future of personalized performance.
+                </p>
+</div>
+<!-- Registration Card -->
+<div class="bg-surface-container-low/40 backdrop-blur-2xl p-8 rounded-[2rem] border border-white/5 shadow-2xl">
+<form class="space-y-5">
+<!-- Full Name -->
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-primary/70 ml-1">Full Name</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:ring-2 focus:ring-primary/40 transition-all font-medium" placeholder="Enter your full name" type="text"/>
+</div>
+</div>
+<!-- Email -->
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-primary/70 ml-1">Email Address</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="mail">mail</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:ring-2 focus:ring-primary/40 transition-all font-medium" placeholder="name@domain.com" type="email"/>
+</div>
+</div>
+<!-- Password Grid for better spacing on mobile -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Password -->
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-primary/70 ml-1">Password</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="lock">lock</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:ring-2 focus:ring-primary/40 transition-all font-medium" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<!-- Confirm Password -->
+<div class="space-y-2">
+<label class="block text-[10px] font-bold uppercase tracking-[0.15em] text-primary/70 ml-1">Confirm</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="verified_user">verified_user</span>
+</div>
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-4 pl-12 pr-4 text-on-surface placeholder:text-outline/50 focus:ring-2 focus:ring-primary/40 transition-all font-medium" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full mt-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold py-5 rounded-xl transition-all hover:scale-[1.02] active:scale-95 shadow-[0_8px_24px_rgba(196,192,255,0.25)] flex items-center justify-center gap-2 group" type="submit">
+<span>Create Account</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="flex items-center my-8">
+<div class="flex-grow h-[1px] bg-white/5"></div>
+<span class="px-4 text-[10px] font-bold text-outline/40 tracking-widest uppercase">Or Register with</span>
+<div class="flex-grow h-[1px] bg-white/5"></div>
+</div>
+<!-- Social Options -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 bg-surface-container-high hover:bg-surface-container-highest py-3 rounded-xl border border-white/5 transition-colors">
+<img alt="Google" class="w-5 h-5" data-alt="Official Google G logo in brand colors for authentication UI" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHPAd174bo6443qwWIgg_yz78MnJ9GFrpunWyLD-Sk0mtlV-g9H2UTRXgHaIpir0iG2xD5_n7xyaESrlOcylEMCINMquU0MImC9qSpXnPm4CDM0_qUPR30JY4cc0bmCiGI_AagxqFzIaqCr51PhZAc2rQX2zxF0mbT8S0RYrFqE8y4uEkxx0SuQEw_7_JFyjSEqDDtMoATIUK7Qwtuwz65S-Oeg1z22DZ8-5ZdJE29K-1SK4fcbGAfXIA0-B_bZT3hl_ZU4KvIYKhc"/>
+<span class="text-xs font-bold uppercase tracking-wider">Google</span>
+</button>
+<button class="flex items-center justify-center gap-3 bg-surface-container-high hover:bg-surface-container-highest py-3 rounded-xl border border-white/5 transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="apple">ios</span>
+<span class="text-xs font-bold uppercase tracking-wider">Apple</span>
+</button>
+</div>
+</div>
+<!-- Footer Link -->
+<div class="text-center mt-10">
+<a class="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="text-sm font-medium">Already have an account?</span>
+<span class="text-sm font-bold text-primary group-hover:underline underline-offset-4">Login</span>
+</a>
+</div>
+</div>
+</main>
+<!-- Side Image Decoration (Web Only) -->
+<div class="hidden lg:block fixed top-0 right-0 w-1/3 h-full overflow-hidden opacity-40">
+<img alt="Fitness Training" class="w-full h-full object-cover mix-blend-luminosity grayscale contrast-125" data-alt="Modern high-end gym interior with minimalist equipment in dramatic low light with cyan and violet accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcSnD3zST_9y1iy1xYfqPI6lBoivjn83pqrwcamYVvnxJLRjH3YZCWPEUwFGtsnRxHEG2yDXceDWc2-6aBrFe-saj3KrwJUAHGXR3t5p2FtrArjjk6meij5VSzJI9FYI40uj7UcwzK4C1urAwkwDSHuwLBOQgSXH7-r5uu20a8qUzdYhfS1cxLMdcniG_JO_8fZ9U3AYJp-gdxWhEGAuOH-Mp1DRE07oN3BgY4C3_7R7QZkQXK1giPLtcfDxBpTdQkcAg958V-4zJJ"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent"></div>
+</div>
+<!-- Branding Watermark -->
+<div class="fixed bottom-8 left-8 hidden md:block">
+<p class="font-headline font-black text-2xl tracking-tighter opacity-10 select-none">FITAI SYSTEM V1.0</p>
+</div>
+</body></html>

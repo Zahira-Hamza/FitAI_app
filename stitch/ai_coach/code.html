@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitAI Coach</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#918fa1",
+                    "on-primary-container": "#1b0091",
+                    "surface-container-high": "#292935",
+                    "secondary-container": "#8f0935",
+                    "primary-fixed-dim": "#c4c0ff",
+                    "tertiary": "#3ae275",
+                    "surface-container-lowest": "#0d0d18",
+                    "primary": "#c4c0ff",
+                    "on-tertiary-container": "#003112",
+                    "surface-tint": "#c4c0ff",
+                    "on-background": "#e3e0f1",
+                    "on-tertiary-fixed-variant": "#005323",
+                    "on-secondary-fixed-variant": "#8f0935",
+                    "surface-dim": "#12121d",
+                    "tertiary-fixed-dim": "#3ae275",
+                    "on-secondary": "#670023",
+                    "on-secondary-container": "#ff97a7",
+                    "surface-container-highest": "#343440",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#ffb2bc",
+                    "inverse-primary": "#4f44e2",
+                    "on-tertiary": "#003916",
+                    "surface-container-low": "#1b1a26",
+                    "on-secondary-fixed": "#400012",
+                    "on-primary-fixed": "#100069",
+                    "tertiary-container": "#00a74e",
+                    "on-tertiary-fixed": "#00210a",
+                    "on-surface": "#e3e0f1",
+                    "secondary": "#ffb2bc",
+                    "error": "#ffb4ab",
+                    "error-container": "#93000a",
+                    "surface-bright": "#383845",
+                    "surface": "#12121d",
+                    "primary-container": "#8781ff",
+                    "on-error-container": "#ffdad6",
+                    "on-primary": "#2000a4",
+                    "outline-variant": "#464555",
+                    "on-primary-fixed-variant": "#3622ca",
+                    "surface-variant": "#343440",
+                    "primary-fixed": "#e3dfff",
+                    "on-surface-variant": "#c7c4d8",
+                    "background": "#12121d",
+                    "secondary-fixed": "#ffd9dd",
+                    "inverse-on-surface": "#302f3b",
+                    "surface-container": "#1f1e2a",
+                    "tertiary-fixed": "#65ff91",
+                    "inverse-surface": "#e3e0f1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(52, 52, 64, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #c4c0ff 0%, #8781ff 100%);
+        }
+        body {
+            background-color: #12121d;
+            font-family: 'Manrope', sans-serif;
+            color: #e3e0f1;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#12121d]/60 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(108,99,255,0.08)] flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/30">
+<img alt="User" data-alt="close-up portrait of a fit individual with soft cinematic lighting and a dark tech-inspired background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNQ1WrPOlLSi-bw7Ovu88g7YGcrtdESl2S-wq4xSS-IEhp5-cIU2LZdsJZBLQxCoDvcgEQJDFgKSON_Cz9rvIK46ltJ40dJB5lKYBIy5y8lRZlHsP2NVAno_HBSdw1_9oQRRTCVN_0N0PMXJ_k__JHzEV9dii9B1Xp1azNqeWfyJQMzKMb-lxAoIriiWuJVr9XK73qKDGuuKKDjEJCHhY7lG-aHAyKlx1HYlcnFAWXKLXEJCLYKd6UE-4cC6rMat7O9SS-lhyqZc_K"/>
+</div>
+<span class="font-headline font-bold tracking-tighter text-2xl text-transparent bg-clip-text bg-gradient-to-br from-[#c4c0ff] to-[#8781ff]">FitAI</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#c4c0ff] hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto space-y-8">
+<!-- Header Section -->
+<section class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h1 class="font-headline text-3xl font-bold tracking-tight">AI Coach</h1>
+</section>
+<!-- Generate a Plan Card -->
+<section class="glass-panel rounded-3xl p-6 border border-white/5 space-y-6">
+<div class="space-y-2">
+<h2 class="font-headline text-xl font-semibold">Generate a Plan</h2>
+<p class="text-on-surface-variant text-sm">Tell me your focus and available time.</p>
+</div>
+<!-- Muscle Group Pills -->
+<div class="space-y-3">
+<span class="text-xs font-bold uppercase tracking-widest text-primary/70">Muscle Groups</span>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full bg-primary text-on-primary text-sm font-bold">Full Body</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-semibold hover:bg-surface-container-highest transition-colors">Chest</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-semibold hover:bg-surface-container-highest transition-colors">Back</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-semibold hover:bg-surface-container-highest transition-colors">Legs</button>
+<button class="px-4 py-2 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-semibold hover:bg-surface-container-highest transition-colors">Core</button>
+</div>
+</div>
+<!-- Duration Pills -->
+<div class="space-y-3">
+<span class="text-xs font-bold uppercase tracking-widest text-primary/70">Duration</span>
+<div class="flex gap-2">
+<button class="flex-1 py-2 rounded-xl bg-surface-container-high text-on-surface-variant text-sm font-semibold border border-transparent hover:border-primary/30 transition-all">20 min</button>
+<button class="flex-1 py-2 rounded-xl bg-primary/20 text-primary text-sm font-bold border border-primary/40 shadow-[0_0_15px_rgba(196,192,255,0.1)]">30 min</button>
+<button class="flex-1 py-2 rounded-xl bg-surface-container-high text-on-surface-variant text-sm font-semibold border border-transparent hover:border-primary/30 transition-all">45 min</button>
+<button class="flex-1 py-2 rounded-xl bg-surface-container-high text-on-surface-variant text-sm font-semibold border border-transparent hover:border-primary/30 transition-all">60 min</button>
+</div>
+</div>
+<!-- Generate Button -->
+<button class="w-full kinetic-gradient py-4 rounded-xl font-headline font-bold text-on-primary shadow-[0_8px_24px_rgba(135,129,255,0.3)] active:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-xl" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                Generate with AI
+            </button>
+</section>
+<!-- Chat Section -->
+<section class="space-y-6 pb-12">
+<!-- AI Message -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-10 h-10 shrink-0 rounded-xl glass-panel flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="space-y-2">
+<div class="bg-surface-container-low p-4 rounded-2xl rounded-tl-none border border-white/5 shadow-sm">
+<p class="text-sm leading-relaxed">Hello! I'm your FitAI Coach. I've analyzed your recent performance. Ready to crush a 30-minute Full Body session today? I've optimized it for maximum metabolic burn.</p>
+</div>
+<span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest px-1">AI Coach • 09:41 AM</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-2 ml-auto max-w-[85%]">
+<div class="kinetic-gradient p-4 rounded-2xl rounded-tr-none shadow-lg">
+<p class="text-sm font-medium text-on-primary">That sounds perfect. Can we emphasize core a bit more today?</p>
+</div>
+<span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest px-1">You • 09:42 AM</span>
+</div>
+<!-- AI Message with Spark -->
+<div class="flex gap-4 max-w-[85%]">
+<div class="w-10 h-10 shrink-0 rounded-xl glass-panel flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="space-y-2">
+<div class="bg-surface-container-low p-4 rounded-2xl rounded-tl-none border border-white/5 shadow-sm flex flex-col gap-3">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-xs font-bold uppercase tracking-tighter">Adjusting Plan...</span>
+</div>
+<p class="text-sm leading-relaxed">Absolutely. I've swapped the standard planks for weighted bird-dogs and added a hollow-body hold finisher. This will increase core activation by approximately 18% based on your previous stability metrics.</p>
+</div>
+<span class="text-[10px] text-slate-500 font-bold uppercase tracking-widest px-1">AI Coach • Just now</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Message Input -->
+<div class="fixed bottom-24 left-0 w-full px-6 z-40">
+<div class="max-w-2xl mx-auto glass-panel rounded-2xl p-2 flex items-center gap-2 border border-white/10 shadow-2xl">
+<input class="bg-transparent border-none focus:ring-0 flex-1 px-4 text-sm text-on-surface placeholder:text-slate-500 font-medium" placeholder="Message AI Coach..." type="text"/>
+<button class="w-10 h-10 rounded-xl kinetic-gradient flex items-center justify-center text-on-primary shadow-lg active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#1c1c2e]/40 backdrop-blur-2xl rounded-t-3xl border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest mt-1">Workouts</span>
+</a>
+<!-- Active AI Coach Tab -->
+<a class="flex flex-col items-center justify-center text-[#c4c0ff] bg-[#c4c0ff]/10 rounded-xl px-3 py-1 shadow-[0_0_15px_rgba(196,192,255,0.3)] active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest mt-1">AI Coach</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest mt-1">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#c4c0ff] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Manrope'] text-[10px] font-semibold uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+</body></html>
