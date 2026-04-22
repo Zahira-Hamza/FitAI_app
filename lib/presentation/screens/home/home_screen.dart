@@ -1,35 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../../data/models/workout_session.dart';
-import '../../../data/services/firebase_service.dart';
+import '../../../data/repositories/ai_repository.dart';
 import '../../providers/user_profile_provider.dart';
-import '../../widgets/common/fitai_card.dart';
-import '../../widgets/common/fitai_button.dart';
-import '../../widgets/common/stat_card.dart';
-import '../../widgets/common/shimmer_loader.dart';
 import '../../widgets/common/bottom_nav_bar.dart';
+import '../../widgets/common/fitai_button.dart';
+import '../../widgets/common/fitai_card.dart';
+import '../../widgets/common/shimmer_loader.dart';
+import '../../widgets/common/stat_card.dart';
 import '../../widgets/workout/workout_card.dart';
 
 // ── Providers ─────────────────────────────────────────────────────────────────
 
-final _todaySessionsProvider = FutureProvider.autoDispose<List<WorkoutSession>>((ref) async {
+final _todaySessionsProvider =
+    FutureProvider.autoDispose<List<WorkoutSession>>((ref) async {
   final uid = FirebaseAuth.instance.currentUser?.uid;
   if (uid == null) return [];
   return ref.watch(firebaseServiceProvider).getTodaySessions(uid);
 });
 
-final _recentSessionsProvider = FutureProvider.autoDispose<List<WorkoutSession>>((ref) async {
+final _recentSessionsProvider =
+    FutureProvider.autoDispose<List<WorkoutSession>>((ref) async {
   final uid = FirebaseAuth.instance.currentUser?.uid;
   if (uid == null) return [];
   return ref.watch(firebaseServiceProvider).getRecentSessions(uid, limit: 3);
 });
 
-// Stub for AI suggestion — replaced in Module 5
+// Real AI suggestion using Gemini with same-day cache
 final _aiSuggestionProvider = FutureProvider.autoDispose<String>((ref) async {
-  await Future.delayed(const Duration(milliseconds: 800));
-  return "Based on your goals, try a 30-min upper body session today. Your recovery looks great — perfect time to push your limits.";
+  final profile = ref.watch(userProfileProvider).profile;
+  if (profile == null) {
+    return "Set up your profile to get personalized AI suggestions.";
+  }
+  return ref.watch(aiRepositoryProvider).getDailySuggestion(profile);
 });
 
 // ── Screen ────────────────────────────────────────────────────────────────────
@@ -38,7 +44,12 @@ class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   static const _quickStartCategories = [
-    'Chest', 'Back', 'Legs', 'Arms', 'Cardio', 'Full Body',
+    'Chest',
+    'Back',
+    'Legs',
+    'Arms',
+    'Cardio',
+    'Full Body',
   ];
 
   String _greeting() {
@@ -340,8 +351,7 @@ class _AISuggestionBanner extends ConsumerWidget {
           children: [
             Row(
               children: const [
-                Icon(Icons.auto_awesome,
-                    color: Color(0xFFC4C0FF), size: 16),
+                Icon(Icons.auto_awesome, color: Color(0xFFC4C0FF), size: 16),
                 SizedBox(width: 8),
                 Text(
                   "TODAY'S AI SUGGESTION",

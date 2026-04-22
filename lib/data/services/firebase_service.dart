@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../models/personal_record.dart';
 import '../models/user_profile.dart';
 import '../models/workout_session.dart';
-import '../models/personal_record.dart';
 
 class FirebaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -31,6 +32,15 @@ class FirebaseService {
     }
   }
 
+  Future<void> updateUserProfile(UserProfile profile) async {
+    await _db
+        .collection('users')
+        .doc(profile.uid)
+        .collection('profile')
+        .doc('main')
+        .update(profile.toMap());
+  }
+
   Future<void> updateAvatarUrl(String uid, String url) async {
     await _db
         .collection('users')
@@ -55,7 +65,6 @@ class FirebaseService {
       final now = DateTime.now();
       final startOfDay = DateTime(now.year, now.month, now.day);
       final endOfDay = startOfDay.add(const Duration(days: 1));
-
       final snap = await _db
           .collection('users')
           .doc(uid)
@@ -63,7 +72,6 @@ class FirebaseService {
           .where('date', isGreaterThanOrEqualTo: startOfDay.toIso8601String())
           .where('date', isLessThan: endOfDay.toIso8601String())
           .get();
-
       return snap.docs
           .map((d) => WorkoutSession.fromMap({...d.data(), 'id': d.id}))
           .toList();
@@ -82,7 +90,6 @@ class FirebaseService {
           .orderBy('date', descending: true)
           .limit(limit)
           .get();
-
       return snap.docs
           .map((d) => WorkoutSession.fromMap({...d.data(), 'id': d.id}))
           .toList();
@@ -102,7 +109,41 @@ class FirebaseService {
           .where('date', isGreaterThanOrEqualTo: weekStart.toIso8601String())
           .where('date', isLessThan: weekEnd.toIso8601String())
           .get();
+      return snap.docs
+          .map((d) => WorkoutSession.fromMap({...d.data(), 'id': d.id}))
+          .toList();
+    } catch (_) {
+      return [];
+    }
+  }
 
+  /// Fetches all sessions from [since] to now — used for 6-week chart data.
+  Future<List<WorkoutSession>> getAllSessionsSince(
+      String uid, DateTime since) async {
+    try {
+      final snap = await _db
+          .collection('users')
+          .doc(uid)
+          .collection('sessions')
+          .where('date', isGreaterThanOrEqualTo: since.toIso8601String())
+          .orderBy('date', descending: false)
+          .get();
+      return snap.docs
+          .map((d) => WorkoutSession.fromMap({...d.data(), 'id': d.id}))
+          .toList();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  Future<List<WorkoutSession>> getAllSessions(String uid) async {
+    try {
+      final snap = await _db
+          .collection('users')
+          .doc(uid)
+          .collection('sessions')
+          .orderBy('date', descending: true)
+          .get();
       return snap.docs
           .map((d) => WorkoutSession.fromMap({...d.data(), 'id': d.id}))
           .toList();
@@ -120,10 +161,7 @@ class FirebaseService {
           .collection('records')
           .orderBy('date', descending: true)
           .get();
-
-      return snap.docs
-          .map((d) => PersonalRecord.fromMap(d.data()))
-          .toList();
+      return snap.docs.map((d) => PersonalRecord.fromMap(d.data())).toList();
     } catch (_) {
       return [];
     }
