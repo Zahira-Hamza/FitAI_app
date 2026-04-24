@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../../../core/utils/snackbar_helper.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -481,14 +483,7 @@ class _SettingsListState extends ConsumerState<_SettingsList> {
               value: true,
               activeColor: const Color(0xFF6C63FF),
               onChanged: (_) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Dark mode is the only way 🌙',
-                        style: TextStyle(color: Colors.white)),
-                    backgroundColor: Color(0xFF252538),
-                    behavior: SnackBarBehavior.floating,
-                  ),
-                );
+                SnackBarHelper.showInfo(context, 'Dark mode is the only way 🌙');
               },
             ),
             _Hdivider(),

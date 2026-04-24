@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../core/errors/app_exception.dart';
 import '../../core/network/dio_client.dart';
+import '../../core/errors/app_exception.dart';
+import '../../core/errors/exception_mappers.dart';
 import '../models/exercise.dart';
 import '../models/workout.dart';
 
@@ -20,11 +23,27 @@ class WgerService {
     'Core': 14,
   };
 
+  Box<String> get _cache => Hive.box<String>('workouts_cache');
+
   Future<List<Exercise>> getExercises({
     String? category,
     int page = 0,
     int limit = 20,
   }) async {
+    final cacheKey = 'exercises_${category ?? "all"}_${page}_$limit';
+
+    // Return cache if available (offline or fresh hit)
+    final cached = _cache.get(cacheKey);
+    if (cached != null) {
+      try {
+        final list = jsonDecode(cached) as List;
+        return list
+            .whereType<Map<String, dynamic>>()
+            .map(Exercise.fromMap)
+            .toList();
+      } catch (_) {} // corrupt cache — fall through to network
+    }
+
     return safeRequest(() async {
       final params = <String, dynamic>{
         'format': 'json',
@@ -37,20 +56,30 @@ class WgerService {
         if (id != null) params['category'] = id;
       }
 
-      // Use /exerciseinfo/ — it returns names + muscles as full objects in one call
-      final response = await _dio.get(
-        '$_base/exerciseinfo/',
-        queryParameters: params,
-      );
+      final response =
+          await _dio.get('$_base/exerciseinfo/', queryParameters: params);
 
-      final results = (response.data['results'] as List<dynamic>?) ?? [];
-      return results
-          .whereType<Map<String, dynamic>>()
-          .map(
-            _exerciseFromInfo,
-          ) // <-- use _exerciseFromInfo, not _exerciseFromWger
-          .where((e) => e.name.isNotEmpty)
-          .toList();
+      try {
+        final results =
+            (response.data['results'] as List<dynamic>?) ?? [];
+        final exercises = results
+            .whereType<Map<String, dynamic>>()
+            .map(_exerciseFromInfo)
+            .where((e) => e.name.isNotEmpty)
+            .toList();
+
+        // Save to cache
+        try {
+          await _cache.put(
+            cacheKey,
+            jsonEncode(exercises.map((e) => e.toMap()).toList()),
+          );
+        } catch (_) {}
+
+        return exercises;
+      } catch (e) {
+        throw ParseException(detail: e.toString());
+      }
     });
   }
 
@@ -58,22 +87,23 @@ class WgerService {
     return safeRequest(() async {
       final response = await _dio.get(
         '$_base/exercise/search/',
-        queryParameters: {'term': query, 'language': 'en', 'format': 'json'},
+        queryParameters: {
+          'term': query,
+          'language': 'en',
+          'format': 'json',
+        },
       );
       try {
         final suggestions =
             response.data['suggestions'] as List<dynamic>? ?? [];
-        return suggestions
-            .map((s) {
-              final data = s['data'] as Map<String, dynamic>? ?? {};
-              return Exercise(
-                id: data['id']?.toString() ?? '',
-                name: s['value']?.toString() ?? '',
-                muscleGroup: data['category']?.toString() ?? '',
-              );
-            })
-            .where((e) => e.id.isNotEmpty)
-            .toList();
+        return suggestions.map((s) {
+          final data = s['data'] as Map<String, dynamic>? ?? {};
+          return Exercise(
+            id: data['id']?.toString() ?? '',
+            name: s['value']?.toString() ?? '',
+            muscleGroup: data['category']?.toString() ?? '',
+          );
+        }).where((e) => e.id.isNotEmpty).toList();
       } catch (e) {
         throw ParseException(detail: e.toString());
       }
@@ -81,13 +111,27 @@ class WgerService {
   }
 
   Future<Exercise> getExerciseDetail(String id) async {
+    final cacheKey = 'exercise_detail_$id';
+    final cached = _cache.get(cacheKey);
+    if (cached != null) {
+      try {
+        return Exercise.fromMap(
+            jsonDecode(cached) as Map<String, dynamic>);
+      } catch (_) {}
+    }
+
     return safeRequest(() async {
       final response = await _dio.get(
         '$_base/exerciseinfo/$id/',
         queryParameters: {'format': 'json'},
       );
       try {
-        return _exerciseFromInfo(response.data as Map<String, dynamic>);
+        final exercise =
+            _exerciseFromInfo(response.data as Map<String, dynamic>);
+        try {
+          await _cache.put(cacheKey, jsonEncode(exercise.toMap()));
+        } catch (_) {}
+        return exercise;
       } catch (e) {
         throw ParseException(detail: e.toString());
       }
@@ -95,10 +139,7 @@ class WgerService {
   }
 
   Workout buildWorkoutFromExercises(
-    List<Exercise> exercises,
-    String name,
-    String category,
-  ) {
+      List<Exercise> exercises, String name, String category) {
     return Workout(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: name,
@@ -112,24 +153,6 @@ class WgerService {
   }
 
   // ── Parsers ────────────────────────────────────────────────────────────────
-
-  Exercise _exerciseFromWger(Map<String, dynamic> e) {
-    // /exercise/ endpoint returns flat fields: id, name, category, muscles (as int IDs)
-    // It does NOT have a translations field — that's only on /exerciseinfo/
-    final name = e['name']?.toString() ?? '';
-
-    // muscles is List<int> here — just store as strings, don't try to read ['name_en']
-    final muscleIds =
-        (e['muscles'] as List<dynamic>?)?.map((m) => m.toString()).toList() ??
-        [];
-
-    return Exercise(
-      id: e['id']?.toString() ?? '',
-      name: name,
-      muscleGroup: e['category']?['name']?.toString() ?? '',
-      muscles: muscleIds,
-    );
-  }
 
   Exercise _exerciseFromInfo(Map<String, dynamic> e) {
     String name = _extractEnglishName(e['translations']);
@@ -145,7 +168,6 @@ class WgerService {
       }
     }
 
-    // /exerciseinfo/ returns full muscle objects — safe to read ['name_en']
     final muscles = _parseMuscleObjects(e['muscles']);
     final musclesSecondary = _parseMuscleObjects(e['muscles_secondary']);
 
@@ -185,14 +207,11 @@ class WgerService {
 
   List<String> _parseMuscleObjects(dynamic muscles) {
     if (muscles == null) return [];
-    return (muscles as List<dynamic>)
-        .map((m) {
-          if (m is Map) {
-            return m['name_en']?.toString() ?? m['name']?.toString() ?? '';
-          }
-          return ''; // guard: ID-only, skip
-        })
-        .where((s) => s.isNotEmpty)
-        .toList();
+    return (muscles as List<dynamic>).map((m) {
+      if (m is Map) {
+        return m['name_en']?.toString() ?? m['name']?.toString() ?? '';
+      }
+      return '';
+    }).where((s) => s.isNotEmpty).toList();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/utils/date_formatter.dart';
 import '../../../data/models/workout_session.dart';
 
 class WorkoutCard extends StatelessWidget {
@@ -89,7 +90,7 @@ class WorkoutCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${session.durationMinutes} mins • ${session.exerciseCount} Exercises',
+                    '${session.durationMinutes} mins • ${session.exerciseCount} Exercises • ${DateFormatter.formatSessionDate(session.date)}',
                     style: const TextStyle(
                       fontFamily: 'Manrope',
                       fontSize: 13,

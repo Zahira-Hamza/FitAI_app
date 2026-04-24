@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../core/utils/snackbar_helper.dart';
 import '../../providers/auth_provider.dart';
 import '../../widgets/common/fitai_button.dart';
 import '../../widgets/common/fitai_text_field.dart';
+import '../../widgets/common/keyboard_dismisser.dart';
 
 class ForgotPasswordScreen extends ConsumerStatefulWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
-  ConsumerState<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  ConsumerState<ForgotPasswordScreen> createState() =>
+      _ForgotPasswordScreenState();
 }
 
 class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
@@ -38,7 +42,9 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       return;
     }
 
-    final success = await ref.read(authStateProvider.notifier).sendPasswordResetEmail(email);
+    final success = await ref
+        .read(authStateProvider.notifier)
+        .sendPasswordResetEmail(email);
 
     if (!mounted) return;
 
@@ -49,16 +55,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
     } else {
       final error = ref.read(authStateProvider).errorMessage;
       if (error != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              error,
-              style: const TextStyle(color: Colors.white),
-            ),
-            backgroundColor: const Color(0xFF252538),
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
+        SnackBarHelper.showError(context, error);
       }
     }
   }
@@ -69,51 +66,57 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFF12121D),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 32),
-              // Header
-              const Center(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.fitness_center,
-                      color: Color(0xFF6C63FF),
-                      size: 48,
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'FitAI',
-                      style: TextStyle(
-                        fontFamily: 'SpaceGrotesk',
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+      body: KeyboardDismisser(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 32),
+                // Header
+                const Center(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.fitness_center,
+                        color: Color(0xFF6C63FF),
+                        size: 48,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 48),
-
-              // Card Container
-              Container(
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF1C1C2E),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: const Color(0x336C63FF), // 20% opacity of 0xFF6C63FF
-                    width: 1,
+                      SizedBox(height: 16),
+                      Text(
+                        'FitAI',
+                        style: TextStyle(
+                          fontFamily: 'SpaceGrotesk',
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: _isSuccess ? _buildSuccessState() : _buildFormState(authState),
-              ),
-            ],
+                const SizedBox(height: 48),
+
+                // Card Container
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1C1C2E),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: const Color(
+                        0x336C63FF,
+                      ), // 20% opacity of 0xFF6C63FF
+                      width: 1,
+                    ),
+                  ),
+                  child: _isSuccess
+                      ? _buildSuccessState()
+                      : _buildFormState(authState),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -183,23 +186,19 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
       children: [
         const SizedBox(height: 16),
         const Center(
-          child: Icon(
-            Icons.check_circle,
-            color: Color(0xFF43E97B),
-            size: 72,
-          ),
+          child: Icon(Icons.check_circle, color: Color(0xFF43E97B), size: 72),
         ),
         const SizedBox(height: 24),
         const Text(
-            'Check your inbox',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontFamily: 'SpaceGrotesk',
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+          'Check your inbox',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontFamily: 'SpaceGrotesk',
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
+        ),
         const SizedBox(height: 8),
         Text(
           'We sent a reset link to ${_emailController.text}',

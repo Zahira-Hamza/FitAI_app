@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
+import '../../../core/utils/snackbar_helper.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/utils/date_formatter.dart';
@@ -12,10 +15,13 @@ class ActiveWorkoutScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(activeWorkoutProvider);
+    // Keep screen awake during workout
+    WakelockPlus.enable();
 
     // Navigate to complete when finished
     ref.listen(activeWorkoutProvider, (prev, next) {
       if (next.isFinished && !(prev?.isFinished ?? false)) {
+        WakelockPlus.disable();
         context.go('/workout-complete');
       }
     });
