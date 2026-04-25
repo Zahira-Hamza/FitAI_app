@@ -1,6 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../data/repositories/auth_repository.dart';
+import 'user_profile_provider.dart';
+import 'progress_provider.dart';
+import 'ai_coach_provider.dart';
+import 'active_workout_provider.dart';
 
 class AuthState {
   final bool isLoading;
@@ -21,7 +26,8 @@ class AuthState {
   }) =>
       AuthState(
         isLoading: isLoading ?? this.isLoading,
-        errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
+        errorMessage:
+            clearError ? null : (errorMessage ?? this.errorMessage),
         currentUser: currentUser ?? this.currentUser,
       );
 }
@@ -32,13 +38,14 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
 
 final authStateProvider =
     StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  return AuthNotifier(ref.watch(authRepositoryProvider));
+  return AuthNotifier(ref.watch(authRepositoryProvider), ref);
 });
 
 class AuthNotifier extends StateNotifier<AuthState> {
   final AuthRepository _authRepository;
+  final Ref _ref;
 
-  AuthNotifier(this._authRepository)
+  AuthNotifier(this._authRepository, this._ref)
       : super(AuthState(currentUser: _authRepository.currentUser)) {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       state = state.copyWith(currentUser: user, clearError: true);
@@ -50,21 +57,27 @@ class AuthNotifier extends StateNotifier<AuthState> {
     try {
       await _authRepository.signInWithEmail(email, password);
       state = state.copyWith(isLoading: false);
+      // Refresh user-specific providers for the new user
+      _refreshUserProviders();
       return true;
     } catch (e) {
-      state = state.copyWith(isLoading: false, errorMessage: e.toString());
+      state = state.copyWith(
+          isLoading: false, errorMessage: e.toString());
       return false;
     }
   }
 
-  Future<bool> signUpWithEmail(String email, String password, String name) async {
+  Future<bool> signUpWithEmail(
+      String email, String password, String name) async {
     state = state.copyWith(isLoading: true, clearError: true);
     try {
       await _authRepository.signUpWithEmail(email, password, name);
       state = state.copyWith(isLoading: false);
+      _refreshUserProviders();
       return true;
     } catch (e) {
-      state = state.copyWith(isLoading: false, errorMessage: e.toString());
+      state = state.copyWith(
+          isLoading: false, errorMessage: e.toString());
       return false;
     }
   }
@@ -74,9 +87,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
     try {
       final credential = await _authRepository.signInWithGoogle();
       state = state.copyWith(isLoading: false);
+      // Refresh user-specific providers for the new account
+      _refreshUserProviders();
       return credential != null;
     } catch (e) {
-      state = state.copyWith(isLoading: false, errorMessage: e.toString());
+      state = state.copyWith(
+          isLoading: false, errorMessage: e.toString());
       return false;
     }
   }
@@ -88,7 +104,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = state.copyWith(isLoading: false);
       return true;
     } catch (e) {
-      state = state.copyWith(isLoading: false, errorMessage: e.toString());
+      state = state.copyWith(
+          isLoading: false, errorMessage: e.toString());
       return false;
     }
   }
@@ -96,10 +113,14 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> signOut() async {
     state = state.copyWith(isLoading: true, clearError: true);
     try {
+      // ── Clear all user-specific provider state BEFORE signing out ──
+      _clearUserProviders();
+
       await _authRepository.signOut();
       state = const AuthState();
     } catch (e) {
-      state = state.copyWith(isLoading: false, errorMessage: e.toString());
+      state = state.copyWith(
+          isLoading: false, errorMessage: e.toString());
     }
   }
 
@@ -110,4 +131,23 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   void clearError() => state = state.copyWith(clearError: true);
+
+  // ── Provider management ───────────────────────────────────────
+
+  /// Invalidates all providers that hold user-specific data.
+  /// Called on sign out so the next user gets a clean slate.
+  void _clearUserProviders() {
+    _ref.invalidate(userProfileProvider);
+    _ref.invalidate(progressProvider);
+    _ref.invalidate(aiCoachProvider);
+    _ref.invalidate(activeWorkoutProvider);
+  }
+
+  /// Refreshes user-specific providers after a new sign in.
+  /// Forces them to reload data for the newly signed-in account.
+  void _refreshUserProviders() {
+    _ref.invalidate(userProfileProvider);
+    _ref.invalidate(progressProvider);
+    _ref.invalidate(aiCoachProvider);
+  }
 }
