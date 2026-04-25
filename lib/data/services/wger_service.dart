@@ -1,10 +1,10 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../core/network/dio_client.dart';
 import '../../core/errors/app_exception.dart';
-import '../../core/errors/exception_mappers.dart';
+import '../../core/network/dio_client.dart';
 import '../models/exercise.dart';
 import '../models/workout.dart';
 
@@ -56,12 +56,13 @@ class WgerService {
         if (id != null) params['category'] = id;
       }
 
-      final response =
-          await _dio.get('$_base/exerciseinfo/', queryParameters: params);
+      final response = await _dio.get(
+        '$_base/exerciseinfo/',
+        queryParameters: params,
+      );
 
       try {
-        final results =
-            (response.data['results'] as List<dynamic>?) ?? [];
+        final results = (response.data['results'] as List<dynamic>?) ?? [];
         final exercises = results
             .whereType<Map<String, dynamic>>()
             .map(_exerciseFromInfo)
@@ -84,29 +85,57 @@ class WgerService {
   }
 
   Future<List<Exercise>> searchExercises(String query) async {
+    if (query.trim().length < 3) return [];
+
+    // Filter from cached exercises locally — avoids the unreliable
+    // /exercise/search/ endpoint which 404s on the public Wger API
     return safeRequest(() async {
-      final response = await _dio.get(
-        '$_base/exercise/search/',
-        queryParameters: {
-          'term': query,
-          'language': 'en',
-          'format': 'json',
-        },
-      );
-      try {
-        final suggestions =
-            response.data['suggestions'] as List<dynamic>? ?? [];
-        return suggestions.map((s) {
-          final data = s['data'] as Map<String, dynamic>? ?? {};
-          return Exercise(
-            id: data['id']?.toString() ?? '',
-            name: s['value']?.toString() ?? '',
-            muscleGroup: data['category']?.toString() ?? '',
-          );
-        }).where((e) => e.id.isNotEmpty).toList();
-      } catch (e) {
-        throw ParseException(detail: e.toString());
+      final params = <String, dynamic>{
+        'format': 'json',
+        'language': 2,
+        'limit': 100,
+        'offset': 0,
+      };
+
+      // Check cache first
+      const cacheKey = 'exercises_all_0_100';
+      final cached = _cache.get(cacheKey);
+      List<Exercise> allExercises = [];
+
+      if (cached != null) {
+        try {
+          final list = jsonDecode(cached) as List;
+          allExercises = list
+              .whereType<Map<String, dynamic>>()
+              .map(Exercise.fromMap)
+              .toList();
+        } catch (_) {}
       }
+
+      // If cache empty, fetch from network
+      if (allExercises.isEmpty) {
+        final response = await _dio.get(
+          '$_base/exerciseinfo/',
+          queryParameters: params,
+        );
+        final results = (response.data['results'] as List<dynamic>?) ?? [];
+        allExercises = results
+            .whereType<Map<String, dynamic>>()
+            .map(_exerciseFromInfo)
+            .where((e) => e.name.isNotEmpty)
+            .toList();
+      }
+
+      // Filter by query
+      final q = query.trim().toLowerCase();
+      return allExercises
+          .where(
+            (e) =>
+                e.name.toLowerCase().contains(q) ||
+                e.muscleGroup.toLowerCase().contains(q) ||
+                e.muscles.any((m) => m.toLowerCase().contains(q)),
+          )
+          .toList();
     });
   }
 
@@ -115,8 +144,7 @@ class WgerService {
     final cached = _cache.get(cacheKey);
     if (cached != null) {
       try {
-        return Exercise.fromMap(
-            jsonDecode(cached) as Map<String, dynamic>);
+        return Exercise.fromMap(jsonDecode(cached) as Map<String, dynamic>);
       } catch (_) {}
     }
 
@@ -126,8 +154,9 @@ class WgerService {
         queryParameters: {'format': 'json'},
       );
       try {
-        final exercise =
-            _exerciseFromInfo(response.data as Map<String, dynamic>);
+        final exercise = _exerciseFromInfo(
+          response.data as Map<String, dynamic>,
+        );
         try {
           await _cache.put(cacheKey, jsonEncode(exercise.toMap()));
         } catch (_) {}
@@ -139,7 +168,10 @@ class WgerService {
   }
 
   Workout buildWorkoutFromExercises(
-      List<Exercise> exercises, String name, String category) {
+    List<Exercise> exercises,
+    String name,
+    String category,
+  ) {
     return Workout(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: name,
@@ -207,11 +239,14 @@ class WgerService {
 
   List<String> _parseMuscleObjects(dynamic muscles) {
     if (muscles == null) return [];
-    return (muscles as List<dynamic>).map((m) {
-      if (m is Map) {
-        return m['name_en']?.toString() ?? m['name']?.toString() ?? '';
-      }
-      return '';
-    }).where((s) => s.isNotEmpty).toList();
+    return (muscles as List<dynamic>)
+        .map((m) {
+          if (m is Map) {
+            return m['name_en']?.toString() ?? m['name']?.toString() ?? '';
+          }
+          return '';
+        })
+        .where((s) => s.isNotEmpty)
+        .toList();
   }
 }

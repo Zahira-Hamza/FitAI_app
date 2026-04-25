@@ -297,19 +297,22 @@ class _PlanGeneratorCard extends ConsumerWidget {
                   color: Color(0xFF9E9EBE),
                   letterSpacing: 1)),
           const SizedBox(height: 8),
-          Row(
-            children: _durations.map((d) {
-              final sel = state.selectedDuration == d;
-              return Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: _Pill(
-                  label: '$d min',
-                  selected: sel,
-                  onTap: () =>
-                      ref.read(aiCoachProvider.notifier).setDuration(d),
-                ),
-              );
-            }).toList(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: _durations.map((d) {
+                final sel = state.selectedDuration == d;
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: _Pill(
+                    label: '$d min',
+                    selected: sel,
+                    onTap: () =>
+                        ref.read(aiCoachProvider.notifier).setDuration(d),
+                  ),
+                );
+              }).toList(),
+            ),
           ),
           const SizedBox(height: 16),
 

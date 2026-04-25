@@ -217,6 +217,8 @@ class _WorkoutBrowserScreenState extends ConsumerState<WorkoutBrowserScreen> {
                     hasFilter:
                         state.selectedCategory != null ||
                         state.searchQuery.isNotEmpty,
+                    isShortQuery: state.searchQuery.isNotEmpty &&
+                        state.searchQuery.trim().length < 3,
                     onClear: () {
                       _searchController.clear();
                       ref
@@ -434,8 +436,13 @@ class _IconPlaceholder extends StatelessWidget {
 
 class _EmptyState extends StatelessWidget {
   final bool hasFilter;
+  final bool isShortQuery;
   final VoidCallback onClear;
-  const _EmptyState({required this.hasFilter, required this.onClear});
+  const _EmptyState({
+    required this.hasFilter,
+    required this.onClear,
+    this.isShortQuery = false,
+  });
 
   @override
   Widget build(BuildContext context) => Center(
@@ -444,18 +451,33 @@ class _EmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.search_off, color: Color(0xFF5A5A7A), size: 64),
+          Icon(
+            isShortQuery ? Icons.search : Icons.search_off,
+            color: const Color(0xFF5A5A7A),
+            size: 64,
+          ),
           const SizedBox(height: 16),
-          const Text(
-            'No workouts found',
-            style: TextStyle(
+          Text(
+            isShortQuery ? 'Keep typing...' : 'No workouts found',
+            style: const TextStyle(
               fontFamily: 'SpaceGrotesk',
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
-          if (hasFilter) ...[
+          const SizedBox(height: 8),
+          if (isShortQuery)
+            const Text(
+              'Type at least 3 characters to search',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'Manrope',
+                fontSize: 13,
+                color: Color(0xFF9E9EBE),
+              ),
+            ),
+          if (hasFilter && !isShortQuery) ...[
             const SizedBox(height: 20),
             SizedBox(
               width: 160,

@@ -113,11 +113,25 @@ class WorkoutBrowserNotifier extends StateNotifier<WorkoutBrowserState> {
   void setSearch(String query) {
     _debounce?.cancel();
     state = state.copyWith(searchQuery: query);
+
     if (query.isEmpty) {
       loadExercises();
       return;
     }
-    _debounce = Timer(const Duration(milliseconds: 500), () async {
+
+    // Don't search until user has typed at least 3 characters
+    if (query.trim().length < 3) {
+      // Clear results and show hint — don't show error
+      state = state.copyWith(
+        exercises: [],
+        isLoading: false,
+        hasMore: false,
+        clearError: true,
+      );
+      return;
+    }
+
+    _debounce = Timer(const Duration(milliseconds: 200), () async {
       state = state.copyWith(isLoading: true, clearError: true);
       try {
         final results = await _wger.searchExercises(query);

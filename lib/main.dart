@@ -2,6 +2,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -37,7 +38,13 @@ void main() async {
   } catch (e) {
     debugPrint('Firebase init failed or already initialized: $e');
   }
-
+  // Load .env — mergeMode keeps existing env vars if .env is missing
+  try {
+    await dotenv.load(fileName: "correct.env", mergeWith: {});
+  } catch (e) {
+    // .env not found — AI features will show error, app continues
+    debugPrint('.env file not found: $e');
+  }
   runApp(const ProviderScope(child: FitAIApp()));
 }
 
@@ -67,8 +74,7 @@ class _ConnectivityWrapper extends ConsumerStatefulWidget {
       _ConnectivityWrapperState();
 }
 
-class _ConnectivityWrapperState
-    extends ConsumerState<_ConnectivityWrapper> {
+class _ConnectivityWrapperState extends ConsumerState<_ConnectivityWrapper> {
   bool _wasOffline = false;
 
   @override
@@ -102,10 +108,7 @@ class _ConnectivityWrapperState
                 behavior: SnackBarBehavior.floating,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
-                  side: const BorderSide(
-                    color: Color(0xFF43E97B),
-                    width: 1,
-                  ),
+                  side: const BorderSide(color: Color(0xFF43E97B), width: 1),
                 ),
                 margin: const EdgeInsets.fromLTRB(16, 0, 16, 12),
                 duration: const Duration(seconds: 3),
@@ -126,13 +129,18 @@ class _ConnectivityWrapperState
                 child: Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(
-                      vertical: 7, horizontal: 16),
+                    vertical: 7,
+                    horizontal: 16,
+                  ),
                   color: const Color(0xFFFFB347).withOpacity(0.15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Icon(Icons.wifi_off_rounded,
-                          color: Color(0xFFFFB347), size: 14),
+                      Icon(
+                        Icons.wifi_off_rounded,
+                        color: Color(0xFFFFB347),
+                        size: 14,
+                      ),
                       SizedBox(width: 6),
                       Text(
                         'No internet — showing cached data',

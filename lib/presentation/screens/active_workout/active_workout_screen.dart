@@ -380,41 +380,57 @@ class _ExerciseCardState extends State<_ExerciseCard>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Current Weight',
+                  const Flexible(
+                    child: Text(
+                      'Weight',
                       style: TextStyle(
                           fontFamily: 'Manrope',
                           fontSize: 13,
-                          color: Color(0xFF9E9EBE))),
+                          color: Color(0xFF9E9EBE)),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(
-                        icon: const Icon(Icons.remove,
-                            color: Colors.white, size: 18),
-                        onPressed: () => ref
+                      GestureDetector(
+                        onTap: () => ref
                             .read(activeWorkoutProvider.notifier)
                             .adjustWeight(exerciseId, -2.5),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
+                        child: Container(
+                          width: 32, height: 32,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF1C1C2E),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(Icons.remove,
+                              color: Colors.white, size: 16),
+                        ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          '${weight.toStringAsFixed(1)} kg',
+                          '${weight.toStringAsFixed(1)}kg',
                           style: const TextStyle(
                               fontFamily: 'SpaceGrotesk',
-                              fontSize: 16,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.add,
-                            color: Colors.white, size: 18),
-                        onPressed: () => ref
+                      GestureDetector(
+                        onTap: () => ref
                             .read(activeWorkoutProvider.notifier)
                             .adjustWeight(exerciseId, 2.5),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
+                        child: Container(
+                          width: 32, height: 32,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF1C1C2E),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(Icons.add,
+                              color: Colors.white, size: 16),
+                        ),
                       ),
                     ],
                   ),

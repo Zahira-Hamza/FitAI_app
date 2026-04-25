@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../core/constants/api_keys.dart';
 import '../../core/errors/app_exception.dart';
@@ -45,33 +46,107 @@ class ChatMessage {
 // ── Service ───────────────────────────────────────────────────────────────────
 
 class GeminiService {
-  static const String _model = 'gemini-1.5-flash';
+  // Groq free tier: 30 req/min, 14,400 req/day — no credit card needed
+  static const String _model = 'llama-3.3-70b-versatile';
+  static const String _baseUrl = 'https://api.groq.com/openai/v1';
 
-  GenerativeModel get _generativeModel => GenerativeModel(
-        model: _model,
-        apiKey: ApiKeys.geminiApiKey,
+  final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: _baseUrl,
+      connectTimeout: const Duration(seconds: 15),
+      receiveTimeout: const Duration(seconds: 30),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${ApiKeys.groqApiKey}',
+      },
+    ),
+  );
+
+  // ── Core request ──────────────────────────────────────────────
+
+  void _validateApiKey() {
+    final key = ApiKeys.groqApiKey;
+    if (key.isEmpty) {
+      throw const ServerException(
+        message: 'AI API key not configured. Please check your .env file.',
       );
+    }
+  }
+
+  Future<String> _complete({
+    required String systemPrompt,
+    required String userMessage,
+    List<ChatMessage> history = const [],
+    int maxTokens = 500,
+  }) async {
+    _validateApiKey();
+    final messages = <Map<String, String>>[
+      {'role': 'system', 'content': systemPrompt},
+      ...history.map(
+        (m) => {
+          'role': m.role == 'user' ? 'user' : 'assistant',
+          'content': m.text,
+        },
+      ),
+      {'role': 'user', 'content': userMessage},
+    ];
+
+    final response = await _dio.post(
+      '/chat/completions',
+      data: {
+        'model': _model,
+        'messages': messages,
+        'max_tokens': maxTokens,
+        'temperature': 0.7,
+      },
+    );
+
+    final content =
+        response.data['choices'][0]['message']['content']?.toString().trim() ??
+        '';
+    return content;
+  }
+
+  // ── Error classifier ──────────────────────────────────────────
+
+  _AIErrorType _classifyError(Object e) {
+    final msg = e.toString().toLowerCase();
+    if (msg.contains('rate_limit') ||
+        msg.contains('429') ||
+        msg.contains('quota')) {
+      return _AIErrorType.quota;
+    }
+    if (msg.contains('401') ||
+        msg.contains('invalid_api_key') ||
+        msg.contains('unauthorized')) {
+      return _AIErrorType.auth;
+    }
+    if (msg.contains('network') ||
+        msg.contains('connection') ||
+        msg.contains('socket') ||
+        msg.contains('timeout')) {
+      return _AIErrorType.network;
+    }
+    return _AIErrorType.unknown;
+  }
 
   // ── Daily suggestion ──────────────────────────────────────────
 
   Future<String> getDailySuggestion(UserProfile profile) async {
     try {
-      final prompt = '''
-You are a professional fitness coach.
-Based on this user profile:
-- Goal: ${profile.goal}
-- Fitness level: ${profile.level}
-Give ONE short motivational workout suggestion in exactly 2 sentences.
-Be specific, energetic, and mention a workout type.
-Return ONLY the suggestion text, nothing else.
-''';
-      final response = await _generativeModel.generateContent(
-        [Content.text(prompt)],
+      final text = await _complete(
+        systemPrompt:
+            'You are a professional fitness coach. Give short, energetic, specific advice.',
+        userMessage:
+            'User goal: ${profile.goal}, level: ${profile.level}. '
+            'Give ONE workout suggestion in exactly 2 sentences. '
+            'Return only the suggestion text, nothing else.',
+        maxTokens: 100,
       );
-      final text = response.text?.trim() ?? '';
       if (text.isEmpty) return _fallbackSuggestion(profile);
       return text;
-    } catch (_) {
+    } catch (e) {
+      debugPrint('[AI getDailySuggestion error] $e');
       return _fallbackSuggestion(profile);
     }
   }
@@ -97,25 +172,38 @@ Return ONLY the suggestion text, nothing else.
     UserProfile profile,
   ) async {
     try {
-      final prompt = '''
-Create a ${durationMinutes}-minute $muscleGroup workout for a ${profile.level} level person whose goal is ${profile.goal}.
-Return ONLY a valid JSON array with no markdown, no code block, no explanation:
-[{"name":"Exercise Name","sets":3,"reps":"8-12","tip":"short form tip in one sentence"}]
-Include 4-6 exercises. Reps should be a string like "8-12" or "12-15" or "30 sec".
-''';
-
-      final response = await _generativeModel.generateContent(
-        [Content.text(prompt)],
+      final text = await _complete(
+        systemPrompt:
+            'You are a fitness coach. Return ONLY valid JSON arrays. '
+            'No markdown, no code blocks, no explanation whatsoever. '
+            'Your entire response must be parseable JSON.',
+        userMessage:
+            'Create a ${durationMinutes}-minute $muscleGroup workout '
+            'for a ${profile.level} whose goal is ${profile.goal}. '
+            'Return ONLY a JSON array with 4-6 exercises:\n'
+            '[{"name":"Exercise Name","sets":3,"reps":"8-12","tip":"one sentence tip"}]',
+        maxTokens: 600,
       );
 
-      final raw = response.text?.trim() ?? '';
-      if (raw.isEmpty) throw const UnknownException();
+      if (text.isEmpty) throw const UnknownException();
 
       // Strip any accidental markdown fences
-      final cleaned =
-          raw.replaceAll('```json', '').replaceAll('```', '').trim();
+      final cleaned = text
+          .replaceAll('```json', '')
+          .replaceAll('```', '')
+          .trim();
 
-      final decoded = jsonDecode(cleaned) as List<dynamic>;
+      // Extract JSON array even if model adds surrounding text
+      final startIdx = cleaned.indexOf('[');
+      final endIdx = cleaned.lastIndexOf(']');
+      if (startIdx == -1 || endIdx == -1) {
+        throw ParseException(
+          detail: 'No JSON array found in response: $cleaned',
+        );
+      }
+      final jsonStr = cleaned.substring(startIdx, endIdx + 1);
+
+      final decoded = jsonDecode(jsonStr) as List<dynamic>;
       return decoded
           .whereType<Map<String, dynamic>>()
           .map(GeneratedExercise.fromMap)
@@ -123,50 +211,58 @@ Include 4-6 exercises. Reps should be a string like "8-12" or "12-15" or "30 sec
     } on AppException {
       rethrow;
     } catch (e) {
-      throw ParseException(detail: e.toString());
+      debugPrint('[AI generateWorkoutPlan error] $e');
+      final type = _classifyError(e);
+      switch (type) {
+        case _AIErrorType.quota:
+          throw const ServerException(
+            message:
+                'AI rate limit reached. Please wait a moment and try again.',
+          );
+        case _AIErrorType.auth:
+          throw const ServerException(
+            message: 'Invalid AI API key. Please check api_keys.dart.',
+          );
+        case _AIErrorType.network:
+          throw const NetworkException();
+        default:
+          throw ParseException(detail: e.toString());
+      }
     }
   }
 
   // ── Chat ──────────────────────────────────────────────────────
 
-  Future<String> chat(
-    List<ChatMessage> history,
-    String newMessage,
-  ) async {
+  Future<String> chat(List<ChatMessage> history, String newMessage) async {
     try {
-      const systemContext = '''
-You are FitAI Coach, a friendly and knowledgeable fitness expert.
-Keep responses concise, practical, and motivating.
-Max 3 sentences per reply. Use simple language.
-If asked about exercises, give specific actionable advice.
-''';
-
-      // Build conversation history for Gemini
-      final contents = <Content>[];
-
-      // Add system context as first user message
-      contents.add(Content.text(systemContext));
-
-      // Add history
-      for (final msg in history) {
-        if (msg.role == 'user') {
-          contents.add(Content.text(msg.text));
-        } else {
-          contents.add(Content.model([TextPart(msg.text)]));
-        }
-      }
-
-      // Add new message
-      contents.add(Content.text(newMessage));
-
-      final response = await _generativeModel.generateContent(contents);
-      final text = response.text?.trim() ?? '';
+      final text = await _complete(
+        systemPrompt:
+            'You are FitAI Coach, a friendly and knowledgeable fitness expert. '
+            'Keep responses concise, practical, and motivating. '
+            'Max 3 sentences per reply. Use simple language.',
+        userMessage: newMessage,
+        history: history,
+        maxTokens: 200,
+      );
       if (text.isEmpty) {
         return "I'm having trouble connecting right now. Please try again.";
       }
       return text;
-    } catch (_) {
-      return "I'm having trouble connecting right now. Please try again.";
+    } catch (e) {
+      debugPrint('[AI chat error] $e');
+      final type = _classifyError(e);
+      switch (type) {
+        case _AIErrorType.quota:
+          return "I'm a bit busy right now — please try again in a moment! 🕐";
+        case _AIErrorType.auth:
+          return "AI configuration error. Please check your API key.";
+        case _AIErrorType.network:
+          return "No internet connection. Please check your network.";
+        default:
+          return "I'm having trouble connecting right now. Please try again.";
+      }
     }
   }
 }
+
+enum _AIErrorType { quota, auth, network, unknown }
