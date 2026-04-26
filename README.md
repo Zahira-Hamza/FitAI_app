@@ -22,22 +22,22 @@
 ### Onboarding & Auth
 | Splash | Onboarding | Login | Sign Up |
 |--------|-----------|-------|---------|
-| ![Splash](screenshots/splash.png) | ![Onboarding](screenshots/onboarding.png) | ![Login](screenshots/login.png) | ![Signup](screenshots/signup.png) |
+| ![Splash](screenshots/splash.jpeg) | ![Onboarding](screenshots/onboarding.jpeg) | ![Login](screenshots/login.jpeg) | ![Signup](screenshots/signup.jpeg) |
 
 ### Core Screens
 | Home | Workouts | Workout Detail | Active Workout |
 |------|----------|----------------|----------------|
-| ![Home](screenshots/home.png) | ![Workouts](screenshots/workouts.png) | ![Detail](screenshots/workout_detail.png) | ![Active](screenshots/active_workout.png) |
+| ![Home](screenshots/home.jpeg) | ![Workouts](screenshots/workouts.jpeg) | ![Detail](screenshots/workout_detail.jpeg) | ![Active](screenshots/active_workout.jpeg) |
 
 ### AI & Progress
 | AI Coach | Rest Timer | Workout Complete | Progress |
 |----------|-----------|-----------------|----------|
-| ![AI Coach](screenshots/ai_coach.png) | ![Rest](screenshots/rest_timer.png) | ![Complete](screenshots/workout_complete.png) | ![Progress](screenshots/progress.png) |
+| ![AI Coach](screenshots/ai_coach.jpeg) | ![Rest](screenshots/rest_timer.jpeg) | ![Complete](screenshots/workout_complete.jpeg) | ![Progress](screenshots/progress.jpeg) |
 
 ### Profile
 | Profile | Profile Setup |
 |---------|--------------|
-| ![Profile](screenshots/profile.png) | ![Setup](screenshots/profile_setup.png) |
+| ![Profile](screenshots/profile.jpeg) | ![Setup](screenshots/profile_setup.jpeg) |
 
 </div>
 
